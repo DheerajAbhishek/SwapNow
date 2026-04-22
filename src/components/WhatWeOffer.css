@@ -1,0 +1,213 @@
+/* ── Section Wrapper ── */
+.wwo-section {
+    padding: 6rem 2rem;
+    background-color: #f8fafc; /* Very light neutral to make cards pop */
+    overflow: hidden;
+    position: relative;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.wwo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* ── Header ── */
+.wwo-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.wwo-header.fade-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wwo-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.wwo-subtitle {
+    font-size: 1.15rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* ── Grid Wrapper / Connection Line ── */
+.wwo-grid-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.wwo-connection-line {
+    position: absolute;
+    top: 3.5rem; /* Aligns with the icon height */
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.wwo-animated-path {
+    stroke-dashoffset: 1000;
+    animation: dash-flow 25s linear infinite;
+}
+
+@keyframes dash-flow {
+    from {
+        stroke-dashoffset: 1000;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Hide line on mobile since grid is stacked vertically */
+@media (max-width: 768px) {
+    .wwo-connection-line {
+        display: none;
+    }
+}
+
+/* ── responsive Grid ── */
+.wwo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    z-index: 2;
+}
+
+@media (max-width: 1024px) {
+    .wwo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .wwo-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ── Claymorphism Card ── */
+.wwo-card {
+    background: #ffffff;
+    border-radius: 28px; /* Classic claymorphism soft corners */
+    padding: 2.2rem 1.8rem;
+    position: relative;
+    /* Soft drop shadow + dual inset highlights for clay depth */
+    box-shadow: 
+        0 20px 40px -10px rgba(0, 0, 0, 0.05),
+        inset 0 4px 6px rgba(255, 255, 255, 1), /* TOP pure white highlight inner rim */
+        inset 0 -4px 10px rgba(0, 0, 0, 0.02);  /* Base subtle dent inner rim */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* For staggering delay injected inline via react */
+    animation-fill-mode: forwards;
+}
+
+/* Base fade-up trigged by IO */
+.wwo-card.fade-in-up {
+    animation: card-fade-up 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) var(--delay) forwards;
+}
+
+@keyframes card-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover State */
+.wwo-card:hover {
+    transform: translateY(-8px) scale(1.03); 
+    box-shadow: 
+        0 30px 50px -12px rgba(25, 158, 65, 0.15), /* Glowing drop shadow tint */
+        inset 0 4px 6px rgba(255, 255, 255, 1),
+        inset 0 -4px 10px rgba(0,0,0, 0.01);
+}
+
+.wwo-card-icon-wrap {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    border-radius: 20px;
+    box-shadow: 
+        inset 0 2px 4px rgba(0,0,0,0.04),
+        0 4px 8px rgba(0, 0, 0, 0.05); /* Slight recessed clay icon slot */
+    transition: all 0.4s ease;
+}
+
+.wwo-icon-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    opacity: 0;
+    filter: blur(12px);
+    transition: opacity 0.5s ease;
+}
+
+.wwo-card:hover .wwo-icon-glow {
+    opacity: 0.2; /* Subtly glow icon wrapper backround on hover */
+}
+
+.wwo-card:hover .wwo-card-icon-wrap {
+    transform: scale(1.1) translateY(-4px);
+    background: #ffffff;
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
+}
+
+/* Icon internal sub-animations on Hover */
+.wwo-icon-svg {
+    position: relative;
+    z-index: 2;
+    transition: stroke 0.3s ease;
+}
+
+.wwo-card:hover .wwo-icon-svg {
+    stroke: var(--brand-color, #199e41);
+    animation: lottie-pulse 1.5s ease infinite alternate;
+}
+
+@keyframes lottie-pulse {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.08) rotate(4deg); }
+}
+
+/* Typography styles */
+.wwo-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+}
+
+.wwo-card-desc {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+}

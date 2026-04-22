@@ -1,0 +1,227 @@
+/* ── Root container ── */
+.cca-root {
+    position: relative;
+    width: 420px;
+    height: 520px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Rotating ring SVG ── */
+.cca-ring-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* ── Centre card ── */
+.cca-card-inner {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 28px;
+    padding: 2.2rem 2rem 1.8rem;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.10),
+        0 0 0 1px rgba(255, 255, 255, 0.35),
+        0 0 45px var(--stage-glow, rgba(114,114,242,0.25));
+    transition: box-shadow 0.6s ease;
+}
+
+/* ── Icon pair morphing ── */
+.cca-icon-pair {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 0.3rem;
+}
+
+.cca-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+}
+
+.cca-icon-visible {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0px);
+}
+
+.cca-icon-hidden {
+    opacity: 0;
+    transform: scale(0.7) rotate(15deg);
+    filter: blur(3px);
+}
+
+/* ── Stage badge ── */
+.cca-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+    transition: background 0.5s ease;
+}
+
+/* ── Title & subtitle ── */
+.cca-title {
+    margin: 0;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--text-strong, #1a1e2a);
+    text-align: center;
+    line-height: 1.3;
+}
+
+.cca-sub {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-muted, #6a7287);
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* ── Progress bar ── */
+.cca-progress-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.07);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 0.4rem;
+}
+
+.cca-progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.1s linear, background 0.5s ease;
+}
+
+/* ── Stage list (right column) ── */
+.cca-stage-list {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.cca-stage-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.4;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.cca-stage-active {
+    opacity: 1;
+    transform: translateX(-4px);
+}
+
+.cca-stage-done {
+    opacity: 0.6;
+}
+
+.cca-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background 0.5s ease, transform 0.3s ease;
+}
+
+.cca-stage-active .cca-dot {
+    transform: scale(1.4);
+    box-shadow: 0 0 6px var(--s-color);
+}
+
+.cca-stage-name {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Ambient glow orbs ── */
+.cca-root::before,
+.cca-root::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: cca-orb 8s ease-in-out infinite alternate;
+}
+
+.cca-root::before {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 5%;
+    background: radial-gradient(circle, rgba(114,114,242,0.18) 0%, transparent 70%);
+    animation-delay: -4s;
+}
+
+.cca-root::after {
+    width: 180px;
+    height: 180px;
+    bottom: 8%;
+    right: 10%;
+    background: radial-gradient(circle, rgba(25,158,65,0.18) 0%, transparent 70%);
+}
+
+@keyframes cca-orb {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(12px, -18px) scale(1.15); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 980px) {
+    .cca-root {
+        width: 100%;
+        height: 420px;
+        max-width: 420px;
+    }
+
+    .cca-stage-list {
+        display: none;   /* too cramped on mobile, ring dots carry the info */
+    }
+
+    .cca-card-inner {
+        width: 220px;
+        padding: 1.8rem 1.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cca-root {
+        height: 360px;
+    }
+
+    .cca-card-inner {
+        width: 200px;
+    }
+}

@@ -1,0 +1,145 @@
+/* Background wrapper */
+.testimonials-section {
+    background-color: #02130e; /* Extremely dark off-green for depth behind the cards */
+    padding: 8rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ── Gradient Fades (The "Category King" Look) ── */
+.testi-fade-left,
+.testi-fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    z-index: 10;
+    pointer-events: none; /* Let hover pass through */
+}
+
+.testi-fade-left {
+    left: 0;
+    background: linear-gradient(to right, #02130e 10%, transparent 100%);
+}
+
+.testi-fade-right {
+    right: 0;
+    background: linear-gradient(to left, #02130e 10%, transparent 100%);
+}
+
+/* ── Marquee Containers ── */
+.marquee-wrapper {
+    position: relative;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.marquee-container {
+    width: 100vw;
+    overflow: visible;
+}
+
+/* Double length container to hold the infinite loop seamlessly */
+.marquee-track {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    align-items: center;
+}
+
+/* Animations */
+.marquee-track.scroll-left {
+    animation: scroll-left-anim 35s linear infinite;
+}
+
+.marquee-track.scroll-right {
+    animation: scroll-right-anim 35s linear infinite;
+}
+
+/* Hover Pauses both simultaneously! */
+.marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-left-anim {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); } 
+}
+
+@keyframes scroll-right-anim {
+    from { transform: translateX(-50%); } 
+    to { transform: translateX(0); }
+}
+
+/* ── Claymorphism 2.0 Card ── */
+.testi-card {
+    flex: 0 0 auto;
+    width: 400px;
+    margin: 0 1rem; /* m-4 horizontal spacing */
+    padding: 2rem; /* p-8 */
+    border-radius: 40px; /* Highly rounded */
+    background-color: #062c21; /* Deep Forest Green */
+    
+    /* Clay styling: Top-left white inset rim + rich dark drop shadow on bottom right */
+    box-shadow: 
+        inset 2px 2px 4px rgba(255, 255, 255, 0.15),
+        inset -2px -2px 6px rgba(0, 0, 0, 0.4),
+        15px 20px 40px -10px rgba(0, 0, 0, 0.8);
+        
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+
+.testi-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+
+/* Header (Avatar & Titles) */
+.testi-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.testi-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4ade80; /* green-400 */
+    box-shadow: 0 4px 10px rgba(74, 222, 128, 0.2);
+}
+
+.testi-meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.testi-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.1rem 0;
+    line-height: 1.2;
+}
+
+.testi-role {
+    font-size: 0.85rem;
+    color: #4ade80; /* green-400 */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+/* The actual review */
+.testi-review {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+}

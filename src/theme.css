@@ -1,0 +1,18 @@
+:root {
+	--primary-700: #063847;
+	--primary-600: #199e41;
+	--primary-500: #f78757;
+
+	--secondary-700: #f9c041;
+	--secondary-600: #ccb6ff;
+	--secondary-500: #7272f2;
+
+	--text-strong: #1a1e2a;
+	--text-body: #394154;
+	--text-muted: #6a7287;
+
+	--stroke-soft: #dfe4ec;
+	--stroke-strong: #b8c2d6;
+	--surface-glass: rgb(255 255 255 / 78%);
+	--shadow-soft: 0 14px 42px -24px rgb(11 23 47 / 34%);
+}
