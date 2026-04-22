@@ -1,8 +1,9 @@
+import React, { useState } from 'react';
 import './theme.css'
 import './App.css'
 import SiteHeader from './components/SiteHeader'
 import HeroSection from './components/HeroSection'
-import WhatWeOffer from './components/WhatWeOffer'
+
 import Testimonials from './components/Testimonials'
 // import Dock from './components/Dock'
 
@@ -24,7 +25,14 @@ import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/s
 import { VscHeart, VscTools, VscAccount, VscCommentDiscussion, VscPlayCircle } from 'react-icons/vsc'
 
 function App() {
+    const [activeCardIndex, setActiveCardIndex] = useState(0);
 
+    const buttonConfig = [
+        { label: 'Consult the Doc', onClick: () => console.log('Consult the Doc') },
+        { label: 'Calculate BMR', onClick: () => console.log('Calculate BMR') },
+        { label: 'Book a Checkup', onClick: () => console.log('Book a Checkup') },
+        { label: 'Order Now', onClick: () => console.log('Order Now') }
+    ];
 
     // Alternative with image sources
     const imageLogos = [
@@ -62,11 +70,36 @@ function App() {
                     color: '#1a1a1a' // Fixed: added a color or you can remove the line
                 }}>
                     How we play!
-                </h1> <CardSwap
+                </h1>
+                <div style={{ textAlign: 'center', marginBottom: '2rem', zIndex: 10, position: 'relative' }}>
+                    <button className="primary-button" style={{
+                        padding: '16px 32px',
+                        borderRadius: '30px',
+                        border: 'none',
+                        backgroundColor: '#1a1a1a',
+                        color: '#fff',
+                        fontSize: '1.1rem',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        transition: 'transform 0.2s ease, background-color 0.2s ease',
+                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                        position: 'relative',
+                        right: '26%',
+                        top: '30px'
+                    }}
+                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
+                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
+                        onClick={buttonConfig[activeCardIndex]?.onClick}
+                    >
+                        {buttonConfig[activeCardIndex]?.label}
+                    </button>
+                </div>
+                <CardSwap
                     cardDistance={60}
                     verticalDistance={70}
                     delay={5000}
                     pauseOnHover={true}
+                    onActiveIndexChange={(newIndex) => setActiveCardIndex(newIndex)}
                 >
                     <Card style={{
                         width: '100%',
@@ -109,13 +142,14 @@ function App() {
                         </div>
 
                         {/* 3. Description text at the bottom */}
-                        <div style={{ padding: '10px 40px 40px 40px' }}>
+                        <div style={{ padding: '10px 40px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <p style={{
                                 color: '#555',
                                 fontSize: '1.1rem',
                                 lineHeight: '1.7',
                                 margin: 0,
-                                textAlign: 'center'
+                                textAlign: 'center',
+                                marginBottom: '20px'
                             }}>
                                 Skip the guesswork. Dedicated doctor consultations and targeted blood panels
                                 to map your metabolic markers with clinical precision.
@@ -163,13 +197,14 @@ function App() {
                         </div>
 
                         {/* 3. Description text at the bottom */}
-                        <div style={{ padding: '10px 40px 40px 40px' }}>
+                        <div style={{ padding: '10px 40px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <p style={{
                                 color: '#555',
                                 fontSize: '1.1rem',
                                 lineHeight: '1.7',
                                 margin: 0,
-                                textAlign: 'center'
+                                textAlign: 'center',
+                                marginBottom: '20px'
                             }}>
                                 Using your Basal Metabolic Rate and clinical data, our experts engineer a precise nutritional roadmap of calories and macros.
                             </p>
@@ -216,13 +251,14 @@ function App() {
                         </div>
 
                         {/* 3. Description text at the bottom */}
-                        <div style={{ padding: '10px 40px 40px 40px' }}>
+                        <div style={{ padding: '10px 40px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <p style={{
                                 color: '#555',
                                 fontSize: '1.1rem',
                                 lineHeight: '1.7',
                                 margin: 0,
-                                textAlign: 'center'
+                                textAlign: 'center',
+                                marginBottom: '20px'
                             }}>
                                 A 360° view of your health. We analyze visceral fat, muscle mass, and metabolic age to track what weight scales miss.
                             </p>
@@ -269,18 +305,63 @@ function App() {
                         </div>
 
                         {/* 3. Description text at the bottom */}
-                        <div style={{ padding: '10px 40px 40px 40px' }}>
+                        <div style={{ padding: '10px 40px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <p style={{
                                 color: '#555',
                                 fontSize: '1.1rem',
                                 lineHeight: '1.7',
                                 margin: 0,
-                                textAlign: 'center'
+                                textAlign: 'center',
+                                marginBottom: '20px'
                             }}>
-                                Nutritionist-crafted, medical-grade meals tailored to your profile, delivered fresh to your doorstep daily.</p>
+                                Nutritionist-crafted, medical-grade meals tailored to your profile, delivered fresh to your doorstep daily.
+                            </p>
                         </div>
                     </Card>
                 </CardSwap>
+            </div>
+
+            {/* Instagram Reels Section */}
+            <div style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: '#fff', marginTop: '2rem' }}>
+                <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '3rem', color: '#1a1a1a', fontWeight: '800' }}>
+                    See us in action!
+                </h2>
+                <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    {/* Replace "p/XXXXXaYYY" with the actual ID from your reel URL */}
+                    <iframe
+
+                        src="https://www.instagram.com/reel/DQeclOaAaDS/embed"
+                        width="320"
+                        height="540"
+                        frameBorder="0"
+                        scrolling="no"
+                        allowtransparency="true"
+                        style={{ borderRadius: '16px', boxShadow: '0 15px 35px rgba(0,0,0,0.1)' }}
+                        title="Instagram Reel 1"
+                    ></iframe>
+
+                    <iframe
+                        src="https://www.instagram.com/reel/DSH-QPPgap5/embed"
+                        width="320"
+                        height="540"
+                        frameBorder="0"
+                        scrolling="no"
+                        allowtransparency="true"
+                        style={{ borderRadius: '16px', boxShadow: '0 15px 35px rgba(0,0,0,0.1)' }}
+                        title="Instagram Reel 2"
+                    ></iframe>
+
+                    <iframe
+                        src="https://www.instagram.com/reel/DQ4SgXPATz7/embed"
+                        width="320"
+                        height="540"
+                        frameBorder="0"
+                        scrolling="no"
+                        allowtransparency="true"
+                        style={{ borderRadius: '16px', boxShadow: '0 15px 35px rgba(0,0,0,0.1)' }}
+                        title="Instagram Reel 3"
+                    ></iframe>
+                </div>
             </div>
 
             <Testimonials />

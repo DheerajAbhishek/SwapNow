@@ -36,7 +36,8 @@ const CardSwap = ({
   onCardClick,
   skewAmount = 6,
   easing = 'elastic',
-  children
+  children,
+  onActiveIndexChange
 }) => {
   const config =
     easing === 'elastic'
@@ -129,6 +130,7 @@ const CardSwap = ({
 
       tl.call(() => {
         order.current = [...rest, front];
+        if (onActiveIndexChange) onActiveIndexChange(order.current[0]);
       });
     };
 
