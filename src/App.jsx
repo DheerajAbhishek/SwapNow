@@ -12,7 +12,10 @@ import weWorkLogo from './assets/logos/weWork.png';
 import springBoardLogo from './assets/logos/91sp.png';
 import isb from './assets/logos/isb.png';
 import ebg from './assets/logos/ebg.jpg';
-import doc from './assets/logos/doc.jpg';
+import doc from './assets/images/doc.jpeg';
+import del from './assets/images/del.jpeg';
+import bmr from './assets/images/bmr.jpeg';
+import fba from './assets/images/fba.jpeg';
 
 
 import CardSwap, { Card } from './components/CardSwap'
@@ -49,25 +52,233 @@ function App() {
 
             <HeroSection />
 
-            <div style={{ height: '600px', position: 'relative' }}>
-                <CardSwap
+            <div className='imgs' style={{ height: '600px', position: 'relative' }}>
+                <h1 style={{
+                    padding: '4rem 7rem 2rem 7rem',
+                    fontSize: 'clamp(2.5rem, 5vw, 4rem)', // Fixed: camelCase
+                    lineHeight: '1.1',
+                    marginBottom: '1.5rem',
+                    fontWeight: '800', // Fixed: comma instead of semicolon
+                    color: '#1a1a1a' // Fixed: added a color or you can remove the line
+                }}>
+                    How we play!
+                </h1> <CardSwap
                     cardDistance={60}
                     verticalDistance={70}
                     delay={5000}
-                    pauseOnHover={false}
+                    pauseOnHover={true}
                 >
-                    <Card>
-                        <h3>Professional Clinical Consultation</h3>
-                        <img src={doc} alt="Doctor" style={{ height: '368px', paddingLeft: '26px' }} />
-                        <p>Skip the guesswork. Dedicated doctor consultations and targeted blood panels to map your metabolic markers</p>
+                    <Card style={{
+                        width: '100%',
+                        maxWidth: '800px',
+                        borderRadius: '24px',
+                        overflow: 'hidden',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.06)',
+                        border: '1px solid #f0f0f0',
+                        backgroundColor: '#fff',
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        {/* 1. Title at the very top */}
+                        <div style={{ padding: '20px 32px 20px 32px' }}>
+                            <h3 style={{
+                                fontSize: '24px',
+                                fontWeight: '400',
+                                color: '#1a1a1a',
+                                margin: 0,
+                                lineHeight: '1.2',
+
+                            }}>
+                                Professional Clinical Consultation
+                            </h3>
+                        </div>
+
+                        {/* 2. Full Image in the middle */}
+                        <div style={{ width: '100%', height: '71%', backgroundColor: '#f9f9f9' }}>
+                            <img
+                                src={doc}
+                                alt="Doctor"
+                                style={{
+                                    width: '86%',
+                                    height: '93%', // Allows the full image to show without cropping
+                                    display: 'block',
+                                    paddingLeft: '50px',
+                                    borderRadius: '12px'
+                                }}
+                            />
+                        </div>
+
+                        {/* 3. Description text at the bottom */}
+                        <div style={{ padding: '10px 40px 40px 40px' }}>
+                            <p style={{
+                                color: '#555',
+                                fontSize: '1.1rem',
+                                lineHeight: '1.7',
+                                margin: 0,
+                                textAlign: 'center'
+                            }}>
+                                Skip the guesswork. Dedicated doctor consultations and targeted blood panels
+                                to map your metabolic markers with clinical precision.
+                            </p>
+                        </div>
                     </Card>
-                    <Card>
-                        <h3>Card 2</h3>
-                        <p>Your content here</p>
+                    <Card style={{
+                        width: '100%',
+                        maxWidth: '800px',
+                        borderRadius: '24px',
+                        overflow: 'hidden',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.06)',
+                        border: '1px solid #f0f0f0',
+                        backgroundColor: '#fff',
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        {/* 1. Title at the very top */}
+                        <div style={{ padding: '20px 32px 20px 32px' }}>
+                            <h3 style={{
+                                fontSize: '24px',
+                                fontWeight: '400',
+                                color: '#1a1a1a',
+                                margin: 0,
+                                lineHeight: '1.2',
+
+                            }}>
+                                BMR-Driven Macro Mapping
+                            </h3>
+                        </div>
+
+                        {/* 2. Full Image in the middle */}
+                        <div style={{ width: '100%', height: '71%', backgroundColor: '#f9f9f9' }}>
+                            <img
+                                src={bmr}
+                                alt="Doctor"
+                                style={{
+                                    width: '86%',
+                                    height: '93%', // Allows the full image to show without cropping
+                                    display: 'block',
+                                    paddingLeft: '50px',
+                                    borderRadius: '12px'
+                                }}
+                            />
+                        </div>
+
+                        {/* 3. Description text at the bottom */}
+                        <div style={{ padding: '10px 40px 40px 40px' }}>
+                            <p style={{
+                                color: '#555',
+                                fontSize: '1.1rem',
+                                lineHeight: '1.7',
+                                margin: 0,
+                                textAlign: 'center'
+                            }}>
+                                Using your Basal Metabolic Rate and clinical data, our experts engineer a precise nutritional roadmap of calories and macros.
+                            </p>
+                        </div>
                     </Card>
-                    <Card>
-                        <h3>Card 3</h3>
-                        <p>Your content here</p>
+                    <Card style={{
+                        width: '100%',
+                        maxWidth: '800px',
+                        borderRadius: '24px',
+                        overflow: 'hidden',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.06)',
+                        border: '1px solid #f0f0f0',
+                        backgroundColor: '#fff',
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        {/* 1. Title at the very top */}
+                        <div style={{ padding: '20px 32px 20px 32px' }}>
+                            <h3 style={{
+                                fontSize: '24px',
+                                fontWeight: '400',
+                                color: '#1a1a1a',
+                                margin: 0,
+                                lineHeight: '1.2',
+
+                            }}>
+                                Deep Full-Body Analysis
+                            </h3>
+                        </div>
+
+                        {/* 2. Full Image in the middle */}
+                        <div style={{ width: '100%', backgroundColor: '#f9f9f9' }}>
+                            <img
+                                src={fba}
+                                alt="Doctor"
+                                style={{
+                                    width: '86%',
+                                    height: '93%', // Allows the full image to show without cropping
+                                    display: 'block',
+                                    paddingLeft: '50px',
+                                    borderRadius: '12px'
+                                }}
+                            />
+                        </div>
+
+                        {/* 3. Description text at the bottom */}
+                        <div style={{ padding: '10px 40px 40px 40px' }}>
+                            <p style={{
+                                color: '#555',
+                                fontSize: '1.1rem',
+                                lineHeight: '1.7',
+                                margin: 0,
+                                textAlign: 'center'
+                            }}>
+                                A 360° view of your health. We analyze visceral fat, muscle mass, and metabolic age to track what weight scales miss.
+                            </p>
+                        </div>
+                    </Card>
+                    <Card style={{
+                        width: '100%',
+                        maxWidth: '800px',
+                        borderRadius: '24px',
+                        overflow: 'hidden',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.06)',
+                        border: '1px solid #f0f0f0',
+                        backgroundColor: '#fff',
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        {/* 1. Title at the very top */}
+                        <div style={{ padding: '20px 32px 20px 32px' }}>
+                            <h3 style={{
+                                fontSize: '24px',
+                                fontWeight: '400',
+                                color: '#1a1a1a',
+                                margin: 0,
+                                lineHeight: '1.2',
+
+                            }}>
+                                Precision Personalized Delivery
+                            </h3>
+                        </div>
+
+                        {/* 2. Full Image in the middle */}
+                        <div style={{ width: '100%', backgroundColor: '#f9f9f9' }}>
+                            <img
+                                src={del}
+                                alt="Doctor"
+                                style={{
+                                    width: '86%',
+                                    height: '93%', // Allows the full image to show without cropping
+                                    display: 'block',
+                                    paddingLeft: '50px',
+                                    borderRadius: '12px'
+                                }}
+                            />
+                        </div>
+
+                        {/* 3. Description text at the bottom */}
+                        <div style={{ padding: '10px 40px 40px 40px' }}>
+                            <p style={{
+                                color: '#555',
+                                fontSize: '1.1rem',
+                                lineHeight: '1.7',
+                                margin: 0,
+                                textAlign: 'center'
+                            }}>
+                                Nutritionist-crafted, medical-grade meals tailored to your profile, delivered fresh to your doorstep daily.</p>
+                        </div>
                     </Card>
                 </CardSwap>
             </div>
