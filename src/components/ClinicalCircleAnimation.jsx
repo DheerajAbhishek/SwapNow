@@ -9,7 +9,7 @@ import './ClinicalCircleAnimation.css'
 const STAGES = [
     {
         id: 1,
-        label: 'Consult & Clinical Data',
+        label: 'Consult &\nClinical Data',
         sublabel: 'Doctor-led diagnostics & blood panel',
         icons: [Stethoscope, Microscope],
         color: '#7272f2',
@@ -18,7 +18,7 @@ const STAGES = [
     },
     {
         id: 2,
-        label: 'Personalized Health Blueprint',
+        label: 'Personalized\nHealth Blueprint',
         sublabel: 'Genetics + metabolic markers decoded',
         icons: [Dna, LayoutDashboard],
         color: '#199e41',
@@ -27,7 +27,7 @@ const STAGES = [
     },
     {
         id: 3,
-        label: 'Nutritionist-Crafted Fuel',
+        label: 'Nutritionist-Crafted\nFuel',
         sublabel: 'Precision recipes built for your body',
         icons: [ChefHat, Leaf],
         color: '#f78757',
@@ -36,7 +36,7 @@ const STAGES = [
     },
     {
         id: 4,
-        label: 'Precision Meal Delivery',
+        label: 'Precision\nMeal Delivery',
         sublabel: 'Nutritionist-approved, door to door',
         icons: [Package, CheckCircle],
         color: '#f9c041',
@@ -45,7 +45,7 @@ const STAGES = [
     },
     {
         id: 5,
-        label: 'Track, Consult & Optimize',
+        label: 'Track, Consult\n& Optimize',
         sublabel: 'Feedback loop to your clinical team',
         icons: [Smartphone, TrendingUp],
         color: '#199e41',
@@ -143,8 +143,8 @@ export default function ClinicalCircleAnimation() {
                     const isActive = i === activeStage
 
                     // Position labels radially outwards
-                    const textOffsetX = Math.cos(angle) * 45
-                    const textOffsetY = Math.sin(angle) * 45 + 4
+                    const textOffsetX = Math.cos(angle) * 50
+                    const textOffsetY = Math.sin(angle) * 50 + 5
                     const textAnchor = Math.cos(angle) > 0.1 ? "start" : Math.cos(angle) < -0.1 ? "end" : "middle"
 
                     const StageIcon = s.icons[0]
@@ -168,17 +168,23 @@ export default function ClinicalCircleAnimation() {
                             {/* Label */}
                             <text
                                 x={dx + textOffsetX}
-                                y={dy + textOffsetY}
+                                y={dy + textOffsetY - (s.label.includes('\n') ? 8 : 0)}
                                 textAnchor={textAnchor}
-                                fill={isActive ? '#000000' : isPast ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.4)'}
-                                fontSize="12"
-                                fontWeight={isActive ? "700" : "500"}
+                                fill={isActive ? s.color : '#1a202c'}
+                                fontSize={isActive ? "15" : "13.5"}
+                                fontWeight={isActive ? "700" : "600"}
                                 style={{
-                                    transition: 'fill 0.4s ease, font-weight 0.4s ease',
-                                    pointerEvents: 'none'
+                                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    pointerEvents: 'none',
+                                    filter: isActive ? `drop-shadow(0px 2px 6px ${s.glow})` : 'drop-shadow(0px 1px 2px rgba(0,0,0,0.05))',
+                                    letterSpacing: '-0.3px',
                                 }}
                             >
-                                {s.label}
+                                {s.label.split('\n').map((line, index) => (
+                                    <tspan key={index} x={dx + textOffsetX} dy={index === 0 ? 0 : "1.2em"}>
+                                        {line}
+                                    </tspan>
+                                ))}
                             </text>
                         </g>
                     )

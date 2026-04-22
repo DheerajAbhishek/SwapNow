@@ -16,9 +16,9 @@ function HeroSection() {
             </div>
             <div className="hero-content-container">
                 <div className="hero-card">
-                    <p className="hero-kicker">
-                        {/* India's First Clinical Health Ecosystem */}
-                    </p>
+                    {/* <p className="hero-kicker">
+                        India's First Clinical Health Ecosystem
+                    </p> */}
                     <h1 className="hero-title">India’s First end to end Health Ecosystem.</h1>
                     <SplitText
                         text="We’ve bridged the gap between the doctor’s and your kitchen. A synchronized ecosystem built for your results."

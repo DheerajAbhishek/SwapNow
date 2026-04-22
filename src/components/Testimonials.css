@@ -1,8 +1,10 @@
 /* Background wrapper */
 .testimonials-section {
     background-color: #ffffff;
+    /* Explicitly use Inter/Sans-Serif for Testimonials, overriding Sklow */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     /* Extremely dark off-green for depth behind the cards */
-    padding: 8rem 0;
+    padding: 4rem 0;
     position: relative;
     overflow: hidden;
 }

@@ -2,11 +2,12 @@
     position: relative;
     width: min(1120px, calc(100% - 3rem));
     z-index: 1;
-    padding: 4rem 0;
+    padding: 2rem 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 4rem;
+    gap: 2rem;
+    width: 85%;
 }
 
 @media (max-width: 980px) {
@@ -35,7 +36,7 @@
     backdrop-filter: blur(8px);
     border: 2px solid white;
     border-radius: 50%;
-    box-shadow: 0 14px 42px -12px rgba(0,0,0,0.15);
+    box-shadow: 0 14px 42px -12px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,7 +57,7 @@
     object-fit: contain;
     z-index: 5;
     opacity: 0;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
 }
 
 .pizza-img {
@@ -68,24 +69,31 @@
 }
 
 @keyframes logoBlink {
-    0%, 40% {
-        box-shadow: 0 14px 42px -12px rgba(0,0,0,0.15);
+
+    0%,
+    40% {
+        box-shadow: 0 14px 42px -12px rgba(0, 0, 0, 0.15);
         transform: scale(1);
     }
+
     44% {
         box-shadow: 0 0 45px rgba(25, 158, 65, 0.8);
         transform: scale(1.1);
     }
+
     48% {
-        box-shadow: 0 14px 42px -12px rgba(0,0,0,0.15);
+        box-shadow: 0 14px 42px -12px rgba(0, 0, 0, 0.15);
         transform: scale(1);
     }
+
     52% {
         box-shadow: 0 0 45px rgba(25, 158, 65, 0.8);
         transform: scale(1.1);
     }
-    56%, 100% {
-        box-shadow: 0 14px 42px -12px rgba(0,0,0,0.15);
+
+    56%,
+    100% {
+        box-shadow: 0 14px 42px -12px rgba(0, 0, 0, 0.15);
         transform: scale(1);
     }
 }
@@ -95,18 +103,22 @@
         transform: translateY(-290px) scale(0.9);
         opacity: 0;
     }
+
     5% {
         transform: translateY(-260px) scale(1);
         opacity: 1;
     }
+
     25% {
         transform: translateY(-240px) scale(1);
         opacity: 1;
     }
+
     40% {
         transform: translateY(0px) scale(0.3);
         opacity: 0;
     }
+
     100% {
         transform: translateY(0px) scale(0.3);
         opacity: 0;
@@ -114,23 +126,30 @@
 }
 
 @keyframes popHealthy {
-    0%, 45% {
+
+    0%,
+    45% {
         transform: translateY(0px) scale(0.3);
         opacity: 0;
     }
+
     50% {
         transform: translateY(40px) scale(0.6);
         opacity: 1;
     }
+
     70% {
         transform: translateY(240px) scale(1);
         opacity: 1;
     }
+
     90% {
         transform: translateY(260px) scale(1);
         opacity: 1;
     }
-    95%, 100% {
+
+    95%,
+    100% {
         opacity: 0;
         transform: translateY(290px) scale(0.9);
     }
