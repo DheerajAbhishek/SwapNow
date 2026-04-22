@@ -17,11 +17,11 @@ function HeroSection() {
             <div className="hero-content-container">
                 <div className="hero-card">
                     <p className="hero-kicker">
-                        India's First Clinical Health Ecosystem
+                        {/* India's First Clinical Health Ecosystem */}
                     </p>
-                    <h1 className="hero-title">Taste the Difference of a Smarter Swap.</h1>
+                    <h1 className="hero-title">India’s First end to end Health Ecosystem.</h1>
                     <SplitText
-                        text="Swapnow blends nutrition intelligence with practical meal planning, Science-backed, nutritionist-designed recipes engineered for peak health without sacrificing the flavors you crave."
+                        text="We’ve bridged the gap between the doctor’s and your kitchen. A synchronized ecosystem built for your results."
                         className="hero-text"
                         delay={30}
                         duration={0.6}

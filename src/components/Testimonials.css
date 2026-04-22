@@ -1,6 +1,7 @@
 /* Background wrapper */
 .testimonials-section {
-    background-color: #02130e; /* Extremely dark off-green for depth behind the cards */
+    background-color: #ffffff;
+    /* Extremely dark off-green for depth behind the cards */
     padding: 8rem 0;
     position: relative;
     overflow: hidden;
@@ -14,17 +15,18 @@
     bottom: 0;
     width: 250px;
     z-index: 10;
-    pointer-events: none; /* Let hover pass through */
+    pointer-events: none;
+    /* Let hover pass through */
 }
 
 .testi-fade-left {
     left: 0;
-    background: linear-gradient(to right, #02130e 10%, transparent 100%);
+    background: linear-gradient(to right, #ffffff 10%, transparent 100%);
 }
 
 .testi-fade-right {
     right: 0;
-    background: linear-gradient(to left, #02130e 10%, transparent 100%);
+    background: linear-gradient(to left, #ffffff 10%, transparent 100%);
 }
 
 /* ── Marquee Containers ── */
@@ -64,30 +66,44 @@
 }
 
 @keyframes scroll-left-anim {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); } 
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 @keyframes scroll-right-anim {
-    from { transform: translateX(-50%); } 
-    to { transform: translateX(0); }
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
 }
 
 /* ── Claymorphism 2.0 Card ── */
 .testi-card {
     flex: 0 0 auto;
     width: 400px;
-    margin: 0 1rem; /* m-4 horizontal spacing */
-    padding: 2rem; /* p-8 */
-    border-radius: 40px; /* Highly rounded */
-    background-color: #062c21; /* Deep Forest Green */
-    
+    margin: 0 1rem;
+    /* m-4 horizontal spacing */
+    padding: 2rem;
+    /* p-8 */
+    border-radius: 40px;
+    /* Highly rounded */
+    background-color: #062c21;
+    /* Deep Forest Green */
+
     /* Clay styling: Top-left white inset rim + rich dark drop shadow on bottom right */
-    box-shadow: 
+    box-shadow:
         inset 2px 2px 4px rgba(255, 255, 255, 0.15),
         inset -2px -2px 6px rgba(0, 0, 0, 0.4),
         15px 20px 40px -10px rgba(0, 0, 0, 0.8);
-        
+
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: default;
 }
@@ -109,7 +125,8 @@
     height: 56px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #4ade80; /* green-400 */
+    border: 2px solid #4ade80;
+    /* green-400 */
     box-shadow: 0 4px 10px rgba(74, 222, 128, 0.2);
 }
 
@@ -129,7 +146,8 @@
 
 .testi-role {
     font-size: 0.85rem;
-    color: #4ade80; /* green-400 */
+    color: #4ade80;
+    /* green-400 */
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 600;

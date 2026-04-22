@@ -59,7 +59,7 @@ const STAGE_DURATION = 3      // seconds each stage is active
 export default function ClinicalCircleAnimation() {
     const containerRef = useRef(null)
     const [activeStage, setActiveStage] = useState(0)
-    const [progress, setProgress]       = useState(0)       // 0-100 fill within current stage
+    const [progress, setProgress] = useState(0)       // 0-100 fill within current stage
 
     // Unified animation loop to prevent desync glitches
     useEffect(() => {
@@ -71,8 +71,8 @@ export default function ClinicalCircleAnimation() {
         const tick = (now) => {
             // now from requestAnimationFrame can occasionally be very slightly earlier than performance.now()
             // on the first frame start, resulting in a negative elapsed. Math.max prevents this.
-            const elapsed = Math.max(0, now - start) 
-            
+            const elapsed = Math.max(0, now - start)
+
             const currentStage = Math.floor(elapsed / cycleTime) % totalSteps
             const pct = ((elapsed % cycleTime) / cycleTime) * 100
 
@@ -88,9 +88,9 @@ export default function ClinicalCircleAnimation() {
     const stage = STAGES[activeStage]
 
     // Larger SVG circle params to accommodate big nodes
-    const R   = 160
-    const CX  = 220
-    const CY  = 220
+    const R = 160
+    const CX = 220
+    const CY = 220
     const circ = 2 * Math.PI * R
     // overall progress across all stages
     const totalPct = (activeStage / STAGES.length) + (progress / 100) / STAGES.length
@@ -141,7 +141,7 @@ export default function ClinicalCircleAnimation() {
                     const dy = CY + R * Math.sin(angle)
                     const isPast = i < activeStage || (i === activeStage && progress > 5)
                     const isActive = i === activeStage
-                    
+
                     // Position labels radially outwards
                     const textOffsetX = Math.cos(angle) * 45
                     const textOffsetY = Math.sin(angle) * 45 + 4
@@ -160,8 +160,8 @@ export default function ClinicalCircleAnimation() {
                                 style={{ transition: 'fill 0.5s ease, stroke 0.5s ease' }}
                             />
                             {/* Embedded Lucide Icon inside SVG container */}
-                            <g transform={`translate(${dx - 14}, ${dy - 14})`} 
-                               style={{ color: isPast ? '#ffffff' : '#64748b', transition: 'color 0.5s ease' }}>
+                            <g transform={`translate(${dx - 14}, ${dy - 14})`}
+                                style={{ color: isPast ? '#ffffff' : '#64748b', transition: 'color 0.5s ease' }}>
                                 <StageIcon size={28} strokeWidth={1.5} />
                             </g>
 
@@ -173,7 +173,7 @@ export default function ClinicalCircleAnimation() {
                                 fill={isActive ? '#000000' : isPast ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.4)'}
                                 fontSize="12"
                                 fontWeight={isActive ? "700" : "500"}
-                                style={{ 
+                                style={{
                                     transition: 'fill 0.4s ease, font-weight 0.4s ease',
                                     pointerEvents: 'none'
                                 }}
