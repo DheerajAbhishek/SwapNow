@@ -92,7 +92,7 @@ function HomePage() {
                         transition: 'transform 0.2s ease, background-color 0.2s ease',
                         boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
                         position: 'relative',
-                        right: '26%',
+                        right: '29%',
                         top: '30px'
                     }}
                         onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}

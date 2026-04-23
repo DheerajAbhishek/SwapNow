@@ -37,8 +37,8 @@ function Franchise() {
 
                         <a href="#traction" className="btn-secondary">See Our Traction ↓</a>
                     </div>
-                    <div style={{ marginTop: '60px', width: '100%', maxWidth: '800px', height: '400px', margin: '60px auto 0', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', backgroundColor: 'var(--panel)', padding: '16px', boxSizing: 'border-box' }}>
-                        <img src={fitbarImg} alt="Swapnow Fitbar Setup" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
+                    <div style={{ margin: '60px auto 0', width: '100%', maxWidth: '800px', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', backgroundColor: 'var(--panel)', overflow: 'hidden' }}>
+                        <img src={fitbarImg} alt="Swapnow Fitbar Setup" style={{ width: '100%', height: 'auto', display: 'block' }} />
                     </div>
                 </div>
             </section>
