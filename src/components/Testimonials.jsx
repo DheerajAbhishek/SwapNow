@@ -78,7 +78,7 @@ export default function Testimonials() {
             <div className="testi-fade-right"></div>
 
             <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1rem', textAlign: 'center', zIndex: 10, position: 'relative', marginBottom: '4rem' }}>
-                <h2 style={{ fontSize: '3rem', fontWeight: 800, color: '#000000', marginBottom: '1rem', lineHeight: 1.1 }}>Real Results,<br />Clinical Precision.</h2>
+                <h2 style={{ fontSize: '3rem', fontWeight: 800, color: '#000000', marginBottom: '1rem', lineHeight: 1.1 }}>Ate &<br />Left no crumbs.</h2>
                 <p style={{ color: '#4ade80', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>The Loop Never Stops</p>
             </div>
 

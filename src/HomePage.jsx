@@ -44,10 +44,12 @@ function HomePage() {
     const reelVideos = [reelVid1, reelVid2, reelVid3, reelVid4];
     const [currentlyPlaying, setCurrentlyPlaying] = useState(0);
     const [isInView, setIsInView] = useState(false);
+    const [isMuted, setIsMuted] = useState(false); // Play unmuted by default if browser allows
     const videoRefs = useRef([]);
     const reelsSectionRef = useRef(null);
 
     useEffect(() => {
+        const currentRef = reelsSectionRef.current;
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsInView(entry.isIntersecting);
@@ -55,13 +57,13 @@ function HomePage() {
             { threshold: 0.2 } // Starts playing when 20% of section is visible
         );
 
-        if (reelsSectionRef.current) {
-            observer.observe(reelsSectionRef.current);
+        if (currentRef) {
+            observer.observe(currentRef);
         }
 
         return () => {
-            if (reelsSectionRef.current) {
-                observer.unobserve(reelsSectionRef.current);
+            if (currentRef) {
+                observer.unobserve(currentRef);
             }
         };
     }, []);
@@ -69,8 +71,14 @@ function HomePage() {
     useEffect(() => {
         videoRefs.current.forEach((video, index) => {
             if (video) {
+                video.muted = isMuted || index !== currentlyPlaying;
                 if (index === currentlyPlaying && isInView) {
-                    video.play().catch(e => console.log('Auto-play prevented:', e));
+                    video.play().catch(e => {
+                        console.log('Unmuted auto-play prevented, forcing mute:', e);
+                        setIsMuted(true);
+                        video.muted = true;
+                        video.play().catch(err => console.log('Auto-play completely prevented:', err));
+                    });
                 } else {
                     video.pause();
                     if (index !== currentlyPlaying) {
@@ -79,10 +87,11 @@ function HomePage() {
                 }
             }
         });
-    }, [currentlyPlaying, isInView]);
+    }, [currentlyPlaying, isInView, isMuted]);
 
     const handleVideoClick = (index) => {
         setCurrentlyPlaying(index);
+        setIsMuted(false); // Unmute when user explicitly interacts
     };
 
     const handleVideoEnded = () => {
@@ -401,8 +410,7 @@ function HomePage() {
                                 Compact size. Absolute Impact.
                             </h2>
                             <p style={{ fontSize: '1.1rem', color: '#555', lineHeight: '1.6', marginBottom: '30px' }}>
-                                The era of compromised nutrition is over. We’ve deployed the Fit Bar—a high-velocity fuel station designed to intercept your hunger with surgical precision. personalized for you, ready in under 120 seconds, and priced for daily domination. This isn't a meal; it's your tactical advantage.
-                            </p>
+                                The era of mid snacks is dead. We just dropped the Fit Bar—a high-key fuel station designed to clock your hunger with zero misses. Food that's personalized for you, ready in under two minutes, and priced so you can stay winning every day. This isn't just food; it’s a literal cheat code.    </p>
                         </div>
                         <div style={{ flex: '1 1 calc(33.333% - 20px)', minWidth: '300px' }}>
                             <video
@@ -497,7 +505,7 @@ function HomePage() {
                                 ref={el => videoRefs.current[index] = el}
                                 src={videoSrc}
                                 onEnded={handleVideoEnded}
-                                muted={index !== currentlyPlaying} // Only mute non-playing videos
+                                muted={isMuted || index !== currentlyPlaying} // Only mute non-playing videos
                                 playsInline
                                 style={{
                                     width: '100%',

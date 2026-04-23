@@ -17,7 +17,7 @@ function HeroSection() {
             <div className="hero-content-container">
                 <div className="hero-card">
                     <p className="hero-kicker">
-                        Here to pass the vibe check
+                        Here to pass the vibe check.
                     </p>
                     <h1 className="hero-title">India’s First end to end Health Ecosystem.</h1>
                     <SplitText
