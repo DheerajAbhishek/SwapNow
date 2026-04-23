@@ -16,12 +16,12 @@ function HeroSection() {
             </div>
             <div className="hero-content-container">
                 <div className="hero-card">
-                    {/* <p className="hero-kicker">
-                        India's First Clinical Health Ecosystem
-                    </p> */}
+                    <p className="hero-kicker">
+                        Here to pass the vibe check
+                    </p>
                     <h1 className="hero-title">India’s First end to end Health Ecosystem.</h1>
                     <SplitText
-                        text="We’ve bridged the gap between the doctor’s and your kitchen. A synchronized ecosystem built for your results."
+                        text="We’ve bridged the gap between the doctor’s and your kitchen. So no more delulu meal plans or bland health food. Just real food that’s built for you and a team that’s got your back."
                         className="hero-text"
                         delay={30}
                         duration={0.6}

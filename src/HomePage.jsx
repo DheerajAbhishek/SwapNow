@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './theme.css'
 import './App.css'
 import SiteHeader from './components/SiteHeader'
@@ -17,7 +17,18 @@ import doc from './assets/images/doc.jpeg';
 import del from './assets/images/del.jpeg';
 import bmr from './assets/images/bmr.jpeg';
 import fba from './assets/images/fba.jpeg';
+import fbimg2 from './assets/images/fbimg1.JPG';
+import fbimg1 from './assets/images/fbimg2.JPG';
+import fbimg3 from './assets/images/fbimg3.JPG';
+import food1 from './assets/images/food1.JPG';
+import food2 from './assets/images/food2.JPG';
+import food3 from './assets/images/food3.JPG';
 
+import reelVid2 from './assets/videos/VID_20260423_051433_057.mp4';
+import reelVid1 from './assets/videos/VID_20260423_052410_965.mp4';
+import reelVid3 from './assets/videos/VID_20260423_051130_835.mp4';
+import reelVid4 from './assets/videos/VID_20260423_051400_630.mp4';
+import fitBarVideo from './assets/videos/firbar.mp4';
 
 import CardSwap, { Card } from './components/CardSwap'
 import BmrModal from './components/BmrModal';
@@ -28,6 +39,55 @@ import { VscHeart, VscTools, VscAccount, VscCommentDiscussion, VscPlayCircle } f
 function HomePage() {
     const [activeCardIndex, setActiveCardIndex] = useState(0);
     const [isBmrModalOpen, setIsBmrModalOpen] = useState(false);
+
+    // Reels logic
+    const reelVideos = [reelVid1, reelVid2, reelVid3, reelVid4];
+    const [currentlyPlaying, setCurrentlyPlaying] = useState(0);
+    const [isInView, setIsInView] = useState(false);
+    const videoRefs = useRef([]);
+    const reelsSectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsInView(entry.isIntersecting);
+            },
+            { threshold: 0.2 } // Starts playing when 20% of section is visible
+        );
+
+        if (reelsSectionRef.current) {
+            observer.observe(reelsSectionRef.current);
+        }
+
+        return () => {
+            if (reelsSectionRef.current) {
+                observer.unobserve(reelsSectionRef.current);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        videoRefs.current.forEach((video, index) => {
+            if (video) {
+                if (index === currentlyPlaying && isInView) {
+                    video.play().catch(e => console.log('Auto-play prevented:', e));
+                } else {
+                    video.pause();
+                    if (index !== currentlyPlaying) {
+                        video.currentTime = 0;
+                    }
+                }
+            }
+        });
+    }, [currentlyPlaying, isInView]);
+
+    const handleVideoClick = (index) => {
+        setCurrentlyPlaying(index);
+    };
+
+    const handleVideoEnded = () => {
+        setCurrentlyPlaying((prev) => (prev + 1) % reelVideos.length);
+    };
 
     useEffect(() => {
         // Logs the font-family currently active on the page body
@@ -329,100 +389,139 @@ function HomePage() {
                 </CardSwap>
             </div>
 
+            {/* Fit Bar Section */}
+            <div style={{ padding: '6rem 2rem', backgroundColor: '#fafafa' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '60px' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'center' }}>
+                        <div style={{ flex: '1 1 calc(66.666% - 20px)', minWidth: '300px', textAlign: 'left', paddingRight: '2vw' }}>
+                            {/* <h4 style={{ textTransform: 'uppercase', letterSpacing: '2px', color: '#666', fontSize: '0.9rem', marginBottom: '10px' }}>
+                                compact size absolute. absolute impact
+                            </h4> */}
+                            <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '800', color: '#1a1a1a', marginBottom: '20px', lineHeight: '1.1' }}>
+                                Compact size. Absolute Impact.
+                            </h2>
+                            <p style={{ fontSize: '1.1rem', color: '#555', lineHeight: '1.6', marginBottom: '30px' }}>
+                                The era of compromised nutrition is over. We’ve deployed the Fit Bar—a high-velocity fuel station designed to intercept your hunger with surgical precision. personalized for you, ready in under 120 seconds, and priced for daily domination. This isn't a meal; it's your tactical advantage.
+                            </p>
+                        </div>
+                        <div style={{ flex: '1 1 calc(33.333% - 20px)', minWidth: '300px' }}>
+                            <video
+                                src={fitBarVideo}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                style={{
+                                    width: '100%',
+                                    borderRadius: '16px',
+                                    boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+                                    objectFit: 'cover',
+                                    display: 'block'
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+                        <img src={fbimg1} alt="Fit Bar 1" style={{ width: '100%', height: '400px', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} />
+                        <img src={fbimg2} alt="Fit Bar 2" style={{ width: '100%', height: '400px', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} />
+                        <img src={fbimg3} alt="Fit Bar 3" style={{ width: '100%', height: '400px', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} />
+                    </div>
+                </div>
+            </div>
+
+            {/* The Top Shelf Stash Section */}
+            <div style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
+                    <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '800', color: '#1a1a1a', marginBottom: '3rem', lineHeight: '1.1' }}>
+                        The top shelf stash
+                    </h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+                        <div style={{ textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+                            <img src={food1} alt="Food 1" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                            <div style={{ padding: '24px' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Lorem Ipsum</h3>
+                                <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                        </div>
+                        <div style={{ textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+                            <img src={food2} alt="Food 2" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                            <div style={{ padding: '24px' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Dolor Sit Amet</h3>
+                                <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+                        <div style={{ textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+                            <img src={food3} alt="Food 3" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                            <div style={{ padding: '24px' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Consectetur Adipiscing</h3>
+                                <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* Instagram Reels Section */}
-            <div style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: '#fff', marginTop: '2rem' }}>
+            <div
+                ref={reelsSectionRef}
+                style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: '#fff', marginTop: '2rem' }}
+            >
                 <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '3rem', color: '#1a1a1a', fontWeight: '800' }}>
                     See us in action!
                 </h2>
                 <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                    {/* Reel 1 Wrapper - Crops out Instagram headers/footers */}
-                    <div style={{
-                        width: '320px',
-                        height: '400px',
-                        overflow: 'hidden',
-                        borderRadius: '16px',
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
-                        position: 'relative'
-                    }}>
-                        <iframe
-                            src="https://www.instagram.com/reel/DXWotnRDO6Q/embed"
-                            width="322"
-                            height="700"
-                            frameBorder="0"
-                            scrolling="no"
-                            allowtransparency="true"
-                            style={{ position: 'absolute', top: '-60px', left: '-1px' }}
-                            title="Instagram Reel 1"
-                        ></iframe>
-                        {/* Overlay to block out bottom interactions */}
-                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', background: 'transparent', zIndex: 10 }}></div>
-                    </div>
-
-                    {/* Reel 2 Wrapper */}
-                    <div style={{
-                        width: '320px',
-                        height: '400px',
-                        overflow: 'hidden',
-                        borderRadius: '16px',
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
-                        position: 'relative'
-                    }}>
-                        <iframe
-                            src="https://www.instagram.com/reel/DSH-QPPgap5/embed"
-                            width="322"
-                            height="700"
-                            frameBorder="0"
-                            scrolling="no"
-                            allowtransparency="true"
-                            style={{ position: 'absolute', top: '-60px', left: '-1px' }}
-                            title="Instagram Reel 2"
-                        ></iframe>
-                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', background: 'transparent', zIndex: 10 }}></div>
-                    </div>
-
-                    {/* Reel 3 Wrapper */}
-                    <div style={{
-                        width: '320px',
-                        height: '400px',
-                        overflow: 'hidden',
-                        borderRadius: '16px',
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
-                        position: 'relative'
-                    }}>
-                        <iframe
-                            src="https://www.instagram.com/reel/DQ4SgXPATz7/embed"
-                            width="322"
-                            height="700"
-                            frameBorder="0"
-                            scrolling="no"
-                            allowtransparency="true"
-                            style={{ position: 'absolute', top: '-60px', left: '-1px' }}
-                            title="Instagram Reel 3"
-                        ></iframe>
-                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', background: 'transparent', zIndex: 10 }}></div>
-                    </div>
-                    {/* Reel 4 Wrapper */}
-                    <div style={{
-                        width: '320px',
-                        height: '400px',
-                        overflow: 'hidden',
-                        borderRadius: '16px',
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
-                        position: 'relative'
-                    }}>
-                        <iframe
-                            src="https://www.instagram.com/reel/DLuhejjh5Cs/embed"
-                            width="322"
-                            height="700"
-                            frameBorder="0"
-                            scrolling="no"
-                            allowtransparency="true"
-                            style={{ position: 'absolute', top: '-60px', left: '-1px' }}
-                            title="Instagram Reel 4"
-                        ></iframe>
-                        {/* Overlay to block out bottom interactions */}
-                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', background: 'transparent', zIndex: 10 }}></div>
-                    </div>
+                    {reelVideos.map((videoSrc, index) => (
+                        <div
+                            key={index}
+                            onClick={() => handleVideoClick(index)}
+                            style={{
+                                width: '320px',
+                                height: '568px', // aspect ratio 9:16 approx
+                                overflow: 'hidden',
+                                borderRadius: '16px',
+                                boxShadow: index === currentlyPlaying ? '0 15px 35px rgba(0,0,0,0.3)' : '0 15px 35px rgba(0,0,0,0.1)',
+                                position: 'relative',
+                                cursor: 'pointer',
+                                transform: index === currentlyPlaying ? 'scale(1.05)' : 'scale(1)',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                            }}
+                        >
+                            <video
+                                ref={el => videoRefs.current[index] = el}
+                                src={videoSrc}
+                                onEnded={handleVideoEnded}
+                                muted={index !== currentlyPlaying} // Only mute non-playing videos
+                                playsInline
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover'
+                                }}
+                            />
+                            {/* Overlay to indicate it can be clicked to play if not playing */}
+                            {index !== currentlyPlaying && (
+                                <div style={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    backgroundColor: 'rgba(0,0,0,0.3)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: 'white',
+                                    fontSize: '3rem'
+                                }}>
+                                    <VscPlayCircle />
+                                </div>
+                            )}
+                        </div>
+                    ))}
                 </div>
             </div>
 
