@@ -20,12 +20,14 @@ import fba from './assets/images/fba.jpeg';
 
 
 import CardSwap, { Card } from './components/CardSwap'
+import BmrModal from './components/BmrModal';
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 
 import { VscHeart, VscTools, VscAccount, VscCommentDiscussion, VscPlayCircle } from 'react-icons/vsc'
 
 function HomePage() {
     const [activeCardIndex, setActiveCardIndex] = useState(0);
+    const [isBmrModalOpen, setIsBmrModalOpen] = useState(false);
 
     useEffect(() => {
         // Logs the font-family currently active on the page body
@@ -35,7 +37,7 @@ function HomePage() {
 
     const buttonConfig = [
         { label: 'Consult the Doc', onClick: () => console.log('Consult the Doc') },
-        { label: 'Calculate BMR', onClick: () => console.log('Calculate BMR') },
+        { label: 'Calculate BMR', onClick: () => setIsBmrModalOpen(true) },
         { label: 'Book a Checkup', onClick: () => console.log('Book a Checkup') },
         { label: 'Order Now', onClick: () => console.log('Order Now') }
     ];
@@ -503,6 +505,7 @@ function HomePage() {
                 magnification={70}
             /> */}
 
+            <BmrModal isOpen={isBmrModalOpen} onClose={() => setIsBmrModalOpen(false)} />
         </div>
     )
 }

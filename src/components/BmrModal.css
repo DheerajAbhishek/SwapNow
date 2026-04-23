@@ -1,0 +1,81 @@
+.bmr-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+.bmr-modal-content {
+    background: #fff;
+    padding: 32px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    position: relative;
+    color: #1a1e2a;
+    box-sizing: border-box;
+}
+.bmr-modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #6a7287;
+    line-height: 1;
+}
+.bmr-form-group {
+    margin-bottom: 16px;
+}
+.bmr-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #394154;
+}
+.bmr-form-group input, .bmr-form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dfe4ec;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: inherit;
+    color: #1a1e2a;
+    background: #fdfdfd;
+}
+.bmr-form-group input:focus, .bmr-form-group select:focus {
+    outline: none;
+    border-color: #199e41;
+}
+.bmr-result {
+    margin-top: 24px;
+    padding: 20px;
+    background: rgba(25, 158, 65, 0.1);
+    border: 1px solid rgba(25, 158, 65, 0.3);
+    border-radius: 8px;
+    text-align: center;
+    color: #127932;
+}
+.bmr-result h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #199e41;
+}
+.bmr-result p {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1a1e2a;
+}
+.bmr-result p span {
+    color: #6a7287;
+}

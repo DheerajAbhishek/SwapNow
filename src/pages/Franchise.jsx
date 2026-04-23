@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './Franchise.css';
 import { Link } from 'react-router-dom';
 import logoWithName from '../assets/logos/logoWithName.svg';
+import fitbarImg from '../assets/images/firbar.jpg';
 
 function Franchise() {
     useEffect(() => {
@@ -33,27 +34,17 @@ function Franchise() {
                     <h1>Partner in India's <span className="accent">Food-Led Health</span> Revolution</h1>
                     <p className="hero-sub">Swapnow is not a food brand — it's the <strong style={{ color: '#4fd155' }}>operating system for preventive health</strong>. With 290% YOY growth and 17 live locations, the window to own a cluster is open now.</p>
                     <div className="hero-btns">
-                        <a href="#clusters" className="btn-primary">Explore Investment Clusters</a>
+
                         <a href="#traction" className="btn-secondary">See Our Traction ↓</a>
+                    </div>
+                    <div style={{ marginTop: '60px', width: '100%', maxWidth: '800px', height: '400px', margin: '60px auto 0', borderRadius: '16px', border: '1px solid var(--border)', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', backgroundColor: 'var(--panel)', padding: '16px', boxSizing: 'border-box' }}>
+                        <img src={fitbarImg} alt="Swapnow Fitbar Setup" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
                     </div>
                 </div>
             </section>
 
             {/* WHAT IS SWAPNOW */}
-            <section id="what">
-                <div className="center fade-up">
-                    <p className="section-label">What We Do</p>
-                    <h2 className="section-title">End-to-End Clinical Nutrition.<br />Automated.</h2>
-                    <p className="section-sub">Swapnow is not just another food app. We are a structured, goal-oriented nutrition journey platform — connecting users from consultation to delivery to monitoring.</p>
-                </div>
-                <div className="steps fade-up" style={{ marginTop: '60px' }}>
-                    <div className="step"><div className="step-num">01</div><div className="step-title">Consult</div><div className="step-desc">Clinical nutritionist consultation linked to health goals</div></div>
-                    <div className="step"><div className="step-num">02</div><div className="step-title">Assess</div><div className="step-desc">Diagnostics-linked personalisation & BMR calculation</div></div>
-                    <div className="step"><div className="step-num">03</div><div className="step-title">Personalise</div><div className="step-desc">Custom meal plans per health goal, per family member</div></div>
-                    <div className="step"><div className="step-num">04</div><div className="step-title">Deliver</div><div className="step-desc">Daily meals via kiosks, subscriptions & partner kitchens</div></div>
-                    <div className="step"><div className="step-num">05</div><div className="step-title">Monitor</div><div className="step-desc">Continuous tracking to retain, upsell & improve compliance</div></div>
-                </div>
-            </section>
+
 
             {/* TRACTION */}
             <section id="traction" className="metrics">
@@ -74,52 +65,7 @@ function Franchise() {
             </section>
 
             {/* CLUSTERS */}
-            <section id="clusters" className="clusters">
-                <div className="center fade-up">
-                    <p className="section-label">Investment Models</p>
-                    <h2 className="section-title">Choose Your Cluster</h2>
-                    <p className="section-sub">Two investment tiers. Both fully backed by our clinical platform, tech stack, and national support infrastructure.</p>
-                </div>
-                <div className="cluster-grid fade-up">
 
-                    <div className="cluster-card">
-                        <span className="cluster-tag">Starter</span>
-                        <h3 className="cluster-name">3-Unit Micro-Cluster</h3>
-                        <div className="cluster-invest">₹15L <span>total CapEx</span></div>
-                        <div className="cluster-tenure">5-Year Tenure · Corporates, Gyms, Hospitals, Universities</div>
-                        <hr className="cluster-divider" />
-                        <div className="cluster-item">Franchisee Fee: ₹7.5 Lacs</div>
-                        <div className="cluster-item">Kiosk Setup: ₹7.5 Lacs</div>
-                        <div className="cluster-item">Year 1 Return: 2% of investment</div>
-                        <div className="cluster-item">Year 2–5 Return: 10% of gross sales</div>
-                        <div className="cluster-returns">
-                            <div className="returns-label">Assured Returns (5 Years)</div>
-                            <div className="returns-value">₹31L – ₹39.6L</div>
-                            <div className="returns-monthly">Monthly Est: ₹30K – ₹75K</div>
-                        </div>
-                        <a href="#contact" className="cluster-btn btn-outline">Get Started →</a>
-                    </div>
-
-                    <div className="cluster-card featured">
-                        <span className="cluster-tag">Recommended</span>
-                        <h3 className="cluster-name">10-Unit Scale Cluster</h3>
-                        <div className="cluster-invest">₹50L <span>total CapEx</span></div>
-                        <div className="cluster-tenure">5-Year Tenure · Priority Sites · Max Efficiency</div>
-                        <hr className="cluster-divider" />
-                        <div className="cluster-item">Franchisee Fee: ₹25 Lacs</div>
-                        <div className="cluster-item">Kiosk Setup: ₹25 Lacs</div>
-                        <div className="cluster-item">Year 1 Return: 2% of investment</div>
-                        <div className="cluster-item">Year 2–5 Return: 10% of gross sales</div>
-                        <div className="cluster-returns">
-                            <div className="returns-label">Assured Returns (5 Years)</div>
-                            <div className="returns-value">₹1.03Cr – ₹1.23Cr</div>
-                            <div className="returns-monthly">Monthly Est: ₹1L – ₹2.5L</div>
-                        </div>
-                        <a href="#contact" className="cluster-btn btn-solid">Partner Now →</a>
-                    </div>
-
-                </div>
-            </section>
 
             {/* INCLUSIONS */}
             <section id="inclusions">
@@ -144,17 +90,39 @@ function Franchise() {
             <section id="partner" className="cta-section">
                 <p className="section-label">Join the Movement</p>
                 <h2>The Future of Health<br />is <span className="accent">Food-Led.</span></h2>
-                <p>The window to partner and capture this ₹5B market is open now. Own a cluster. Build a lasting health business across India.</p>
-                <div className="hero-btns">
-                    <a href="mailto:praveenkota@swapnow.in" className="btn-primary">Express Your Interest</a>
-                    <a href="tel:+918897142964" className="btn-secondary">Call Us: 88971 42964</a>
+                <p style={{marginBottom: '40px'}}>The window to partner and capture this ₹5B market is open now. Own a cluster. Build a lasting health business across India.</p>
+                
+                <div className="onboarding-form fade-up">
+                    <h3>Submit Your Interest</h3>
+                    <form onSubmit={(e) => { e.preventDefault(); alert("Thanks for your interest! We'll contact you soon."); }}>
+                        <div className="form-row">
+                            <input type="text" placeholder="Full Name" required />
+                            <input type="email" placeholder="Email Address" required />
+                        </div>
+                        <div className="form-row">
+                            <input type="tel" placeholder="Phone Number" required />
+                            <input type="text" placeholder="City / Location" required />
+                        </div>
+                        <div className="form-row" style={{ gridTemplateColumns: '1fr' }}>
+                            <select required>
+                                <option value="" disabled selected>Select Your Background / Occupation</option>
+                                <option value="corporate">Corporate Professional</option>
+                                <option value="restaurant">Restaurant / F&B Owner</option>
+                                <option value="health">Healthcare / Wellness</option>
+                                <option value="realestate">Real Estate Owner</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>Apply to Partner</button>
+                    </form>
                 </div>
-                <div id="contact" className="contact-card">
+
+                <div id="contact" className="contact-card fade-up">
                     <div className="contact-name">Praveen Kota</div>
                     <div style={{ fontSize: '.8rem', color: 'var(--green)', fontWeight: '600', marginBottom: '8px' }}>Founder & CEO, Swapnow · ISB Alumni</div>
                     <div className="contact-detail"><a href="mailto:praveenkota@swapnow.in">praveenkota@swapnow.in</a></div>
                     <div className="contact-detail"><a href="tel:+918897142964">+91 88971 42964</a></div>
-                    <div className="contact-detail"><Link to="/">swapnow.in</Link></div>
+                    <div className="contact-detail"><Link to="/"><img src={logoWithName} alt="Swapnow" style={{ height: '16px', verticalAlign: 'middle' }} /></Link></div>
                 </div>
             </section>
 
@@ -162,7 +130,7 @@ function Franchise() {
                 <div className="footer-logo">
                     <img src={logoWithName} alt="Swapnow" style={{ height: '30px' }} />
                 </div>
-                <div className="footer-copy">© 2025 Swapnow. All rights reserved. · swapnow.in</div>
+                <div className="footer-copy">© 2025 Swapnow. All rights reserved. · <img src={logoWithName} alt="Swapnow" style={{ height: '14px', verticalAlign: 'middle', opacity: 0.8 }} /></div>
             </footer>
         </div>
     );

@@ -1,13 +1,13 @@
 :root {
-    --bg: #090a0c;
-    --panel: #111316;
-    --border: #1f2226;
-    --text: #ffffff;
-    --muted: #8b929b;
-    --green: #4fd155;
-    --green-dark: #3b9c40;
-    --orange: #ff6b35;
-    --orange-muted: rgba(255, 107, 53, 0.1);
+    --bg: #fdfdfd;
+    --panel: #ffffff;
+    --border: #dfe4ec;
+    --text: #1a1e2a;
+    --muted: #6a7287;
+    --green: #199e41;
+    --green-dark: #127932;
+    --orange: #f78757;
+    --orange-muted: rgba(247, 135, 87, 0.1);
 }
 
 .franchise-body {
@@ -26,7 +26,7 @@
     left: 0;
     right: 0;
     height: 70px;
-    background: rgba(9, 10, 12, 0.8);
+    background: var(--bg);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     z-index: 100;
@@ -42,7 +42,7 @@
     font-size: 1.4rem;
     letter-spacing: -0.5px;
     font-weight: 700;
-    color: #fff;
+    color: var(--text);
 }
 
 .franchise-nav .logo span {
@@ -50,8 +50,8 @@
 }
 
 .nav-cta {
-    background: #fff;
-    color: #000;
+    background: var(--text);
+    color: var(--bg);
     padding: 8px 16px;
     border-radius: 4px;
     font-size: 0.85rem;
@@ -141,7 +141,7 @@
 
 .franchise-body .btn-primary {
     background: var(--green);
-    color: #000;
+    color: #fff;
     padding: 16px 32px;
     border-radius: 4px;
     font-size: 1rem;
@@ -156,7 +156,7 @@
 
 .franchise-body .btn-secondary {
     background: transparent;
-    color: #fff;
+    color: var(--text);
     border: 1px solid var(--border);
     padding: 16px 32px;
     border-radius: 4px;
@@ -279,8 +279,8 @@
     position: absolute;
     top: -12px;
     right: 40px;
-    background: var(--border);
-    color: #fff;
+    background: var(--text);
+    color: var(--bg);
     font-size: 0.75rem;
     font-weight: 600;
     padding: 4px 12px;
@@ -291,7 +291,7 @@
 
 .cluster-card.featured .cluster-tag {
     background: var(--green);
-    color: #000;
+    color: #fff;
 }
 
 .cluster-name {
@@ -304,7 +304,7 @@
 .cluster-invest {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 8px;
 }
 
@@ -332,7 +332,7 @@
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border);
 }
 
 .cluster-item:last-of-type {
@@ -360,7 +360,7 @@
 .returns-value {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 4px;
 }
 
@@ -384,7 +384,7 @@
 
 .btn-solid {
     background: var(--green);
-    color: #000;
+    color: #fff;
 }
 
 .btn-solid:hover {
@@ -393,7 +393,7 @@
 
 .btn-outline {
     background: transparent;
-    color: #fff;
+    color: var(--text);
     border: 1px solid var(--border);
 }
 
@@ -530,7 +530,7 @@
 }
 
 .contact-detail a:hover {
-    color: #fff;
+    color: var(--text);
 }
 
 footer {
@@ -625,4 +625,56 @@ footer {
     .cluster-card {
         padding: 30px;
     }
+}
+/* Onboarding Form */
+.onboarding-form {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto 60px auto;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.onboarding-form h3 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.onboarding-form input,
+.onboarding-form select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.onboarding-form input:focus,
+.onboarding-form select:focus {
+    outline: none;
+    border-color: var(--green);
 }
