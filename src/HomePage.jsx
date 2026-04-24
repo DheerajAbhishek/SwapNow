@@ -398,19 +398,19 @@ function HomePage() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
                         <div style={{ textAlign: 'center' }}>
                             <img src={secImg1} alt="For late nights, not ramen." style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }} />
-                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>For late nights, not ramen.</p>
+                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>Real meals for real grind.</p>
                         </div>
                         <div style={{ textAlign: 'center' }}>
                             <img src={secImg2} alt="For PRs, not just protein" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }} />
-                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>For PRs, not just protein</p>
+                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>Muscles need more than motivation.</p>
                         </div>
                         <div style={{ textAlign: 'center' }}>
                             <img src={secImg3} alt="For vitality, not just aging." style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }} />
-                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>For vitality, not just aging.</p>
+                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>Energy that doesn't retire.</p>
                         </div>
                         <div style={{ textAlign: 'center' }}>
                             <img src={secImg4} alt="For lunch, not spreadsheets" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }} />
-                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>For lunch, not spreadsheets</p>
+                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>You handle deadlines. We'll handle dinner.</p>
                         </div>
                     </div>
                 </div>
