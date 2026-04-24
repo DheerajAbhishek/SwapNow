@@ -134,14 +134,18 @@ const CardSwap = ({
       });
     };
 
-    swap();
-    intervalRef.current = window.setInterval(swap, delay);
+    // Delay the first swap so the initial layout has time to render properly on Safari/Mac
+    const timeoutId = setTimeout(() => {
+      swap();
+      intervalRef.current = window.setInterval(swap, delay);
+    }, delay);
 
     if (pauseOnHover) {
       const node = container.current;
       const pause = () => {
         tlRef.current?.pause();
         clearInterval(intervalRef.current);
+        clearTimeout(timeoutId);
       };
       const resume = () => {
         tlRef.current?.play();
@@ -153,9 +157,13 @@ const CardSwap = ({
         node.removeEventListener('mouseenter', pause);
         node.removeEventListener('mouseleave', resume);
         clearInterval(intervalRef.current);
+        clearTimeout(timeoutId);
       };
     }
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      clearInterval(intervalRef.current);
+      clearTimeout(timeoutId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
 
