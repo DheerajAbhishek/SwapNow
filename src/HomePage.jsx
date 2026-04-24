@@ -13,6 +13,8 @@ import weWorkLogo from './assets/logos/weWork.png';
 import springBoardLogo from './assets/logos/91sp.png';
 import isb from './assets/logos/isb.png';
 import ebg from './assets/logos/ebg.jpg';
+import orangeElement from './assets/logos/orangeElement.png';
+import yellowElement from './assets/logos/yellowElement.png';
 import doc from './assets/images/doc.jpeg';
 import del from './assets/images/del.jpeg';
 import bmr from './assets/images/bmr.jpeg';
@@ -23,6 +25,10 @@ import fbimg3 from './assets/images/fbimg3.JPG';
 import food1 from './assets/images/food1.JPG';
 import food2 from './assets/images/food2.JPG';
 import food3 from './assets/images/food3.JPG';
+import secImg1 from './assets/images/secImg1.jpg';
+import secImg2 from './assets/images/secImg2.jpg';
+import secImg3 from './assets/images/secImg3.jpg';
+import secImg4 from './assets/images/secImg4.jpg';
 
 import reelVid2 from './assets/videos/VID_20260423_051433_057.mp4';
 import reelVid1 from './assets/videos/VID_20260423_052410_965.mp4';
@@ -42,60 +48,33 @@ function HomePage() {
 
     // Reels logic
     const reelVideos = [reelVid1, reelVid2, reelVid3, reelVid4];
-    const [currentlyPlaying, setCurrentlyPlaying] = useState(0);
-    const [isInView, setIsInView] = useState(false);
-    const [isMuted, setIsMuted] = useState(false); // Play unmuted by default if browser allows
+    const [hoveredIndex, setHoveredIndex] = useState(null);
     const videoRefs = useRef([]);
-    const reelsSectionRef = useRef(null);
-
-    useEffect(() => {
-        const currentRef = reelsSectionRef.current;
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setIsInView(entry.isIntersecting);
-            },
-            { threshold: 0.2 } // Starts playing when 20% of section is visible
-        );
-
-        if (currentRef) {
-            observer.observe(currentRef);
-        }
-
-        return () => {
-            if (currentRef) {
-                observer.unobserve(currentRef);
-            }
-        };
-    }, []);
 
     useEffect(() => {
         videoRefs.current.forEach((video, index) => {
             if (video) {
-                video.muted = isMuted || index !== currentlyPlaying;
-                if (index === currentlyPlaying && isInView) {
+                if (index === hoveredIndex) {
+                    video.muted = false; // Always unmute on hover
                     video.play().catch(e => {
                         console.log('Unmuted auto-play prevented, forcing mute:', e);
-                        setIsMuted(true);
                         video.muted = true;
                         video.play().catch(err => console.log('Auto-play completely prevented:', err));
                     });
                 } else {
                     video.pause();
-                    if (index !== currentlyPlaying) {
-                        video.currentTime = 0;
-                    }
+                    video.currentTime = 0; // Reset video to start
                 }
             }
         });
-    }, [currentlyPlaying, isInView, isMuted]);
+    }, [hoveredIndex]);
 
-    const handleVideoClick = (index) => {
-        setCurrentlyPlaying(index);
-        setIsMuted(false); // Unmute when user explicitly interacts
+    const handleMouseEnter = (index) => {
+        setHoveredIndex(index);
     };
 
-    const handleVideoEnded = () => {
-        setCurrentlyPlaying((prev) => (prev + 1) % reelVideos.length);
+    const handleMouseLeave = () => {
+        setHoveredIndex(null);
     };
 
     useEffect(() => {
@@ -138,6 +117,18 @@ function HomePage() {
             <HeroSection />
 
             <div className='imgs' style={{ height: '600px', position: 'relative' }}>
+                <img
+                    src={orangeElement}
+                    alt="Orange Decoration"
+                    style={{
+                        position: 'absolute',
+                        bottom: '20px',
+                        left: '0px',
+                        width: '217px',
+                        zIndex: 0,
+
+                    }}
+                />
                 <h1 style={{
                     padding: '4rem 7rem 2rem 7rem',
                     fontSize: 'clamp(2.5rem, 5vw, 4rem)', // Fixed: camelCase
@@ -398,6 +389,33 @@ function HomePage() {
                 </CardSwap>
             </div>
 
+            {/* Food Thats Coded for You Section */}
+            <div style={{ padding: '6rem 2rem', backgroundColor: '#fff', textAlign: 'center' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '800', color: '#1a1a1a', marginBottom: '3rem', lineHeight: '1.1' }}>
+                        Food that's Coded for You, Not the Crowd.
+                    </h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
+                        <div style={{ textAlign: 'center' }}>
+                            <img src={secImg1} alt="For late nights, not ramen." style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }} />
+                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>For late nights, not ramen.</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <img src={secImg2} alt="For PRs, not just protein" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }} />
+                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>For PRs, not just protein</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <img src={secImg3} alt="For vitality, not just aging." style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }} />
+                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>For vitality, not just aging.</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <img src={secImg4} alt="For lunch, not spreadsheets" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '24px', boxShadow: '0 15px 30px rgba(0,0,0,0.1)' }} />
+                            <p style={{ marginTop: '20px', fontSize: '2.25rem', fontWeight: '600', color: '#1a1a1a' }}>For lunch, not spreadsheets</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* Fit Bar Section */}
             <div style={{ padding: '6rem 2rem', backgroundColor: '#fafafa' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '60px' }}>
@@ -439,8 +457,20 @@ function HomePage() {
             </div>
 
             {/* The Top Shelf Stash Section */}
-            <div style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
+            <div style={{ padding: '6rem 2rem', backgroundColor: '#fff', position: 'relative' }}>
+                <img
+                    src={yellowElement}
+                    alt="Yellow Decoration"
+                    style={{
+                        position: 'absolute',
+                        top: '20px',
+                        right: '0px',
+                        width: '217px',
+                        zIndex: 0,
+
+                    }}
+                />
+                <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
                     <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '800', color: '#1a1a1a', marginBottom: '3rem', lineHeight: '1.1' }}>
                         The top shelf stash
                     </h2>
@@ -478,7 +508,6 @@ function HomePage() {
 
             {/* Instagram Reels Section */}
             <div
-                ref={reelsSectionRef}
                 style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: '#fff', marginTop: '2rem' }}
             >
                 <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '3rem', color: '#1a1a1a', fontWeight: '800' }}>
@@ -488,24 +517,25 @@ function HomePage() {
                     {reelVideos.map((videoSrc, index) => (
                         <div
                             key={index}
-                            onClick={() => handleVideoClick(index)}
+                            onMouseEnter={() => handleMouseEnter(index)}
+                            onMouseLeave={handleMouseLeave}
                             style={{
                                 width: '320px',
                                 height: '568px', // aspect ratio 9:16 approx
                                 overflow: 'hidden',
                                 borderRadius: '16px',
-                                boxShadow: index === currentlyPlaying ? '0 15px 35px rgba(0,0,0,0.3)' : '0 15px 35px rgba(0,0,0,0.1)',
+                                boxShadow: index === hoveredIndex ? '0 15px 35px rgba(0,0,0,0.3)' : '0 15px 35px rgba(0,0,0,0.1)',
                                 position: 'relative',
                                 cursor: 'pointer',
-                                transform: index === currentlyPlaying ? 'scale(1.05)' : 'scale(1)',
+                                transform: index === hoveredIndex ? 'scale(1.05)' : 'scale(1)',
                                 transition: 'transform 0.3s ease, box-shadow 0.3s ease'
                             }}
                         >
                             <video
                                 ref={el => videoRefs.current[index] = el}
                                 src={videoSrc}
-                                onEnded={handleVideoEnded}
-                                muted={isMuted || index !== currentlyPlaying} // Only mute non-playing videos
+                                loop // Loop the video when playing
+                                muted={index !== hoveredIndex} // Unmute only when hovered
                                 playsInline
                                 style={{
                                     width: '100%',
@@ -513,8 +543,8 @@ function HomePage() {
                                     objectFit: 'cover'
                                 }}
                             />
-                            {/* Overlay to indicate it can be clicked to play if not playing */}
-                            {index !== currentlyPlaying && (
+                            {/* Overlay to indicate it plays on hover if not hovered */}
+                            {index !== hoveredIndex && (
                                 <div style={{
                                     position: 'absolute',
                                     inset: 0,
@@ -523,7 +553,8 @@ function HomePage() {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     color: 'white',
-                                    fontSize: '3rem'
+                                    fontSize: '3rem',
+                                    transition: 'background-color 0.3s ease'
                                 }}>
                                     <VscPlayCircle />
                                 </div>
