@@ -1,8 +1,42 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 
 function Signup() {
+    const navigate = useNavigate();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+        setError(null);
+        setLoading(true);
+
+        try {
+            const response = await fetch(`/api/auth/signup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: name, email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Signup failed');
+            }
+
+            // Redirect back to login so they log in with the new credentials
+            navigate('/login');
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="page-shell" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <div className="page-backdrop" aria-hidden="true" />
@@ -26,12 +60,19 @@ function Signup() {
                         Start your food-led health revolution
                     </p>
 
-                    <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'left' }}>
-
+                    <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: '20px', textAlign: 'left' }}>
+                        {error && (
+                            <div style={{ padding: '12px', backgroundColor: '#fee2e2', color: '#dc2626', borderRadius: '8px', fontSize: '0.9rem' }}>
+                                {error}
+                            </div>
+                        )}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             <label style={{ fontSize: '0.9rem', color: '#1a1a1a', fontWeight: 600 }}>Full Name</label>
                             <input
                                 type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
                                 placeholder="Enter your full name"
                                 style={{
                                     padding: '14px 16px',
@@ -48,6 +89,9 @@ function Signup() {
                             <label style={{ fontSize: '0.9rem', color: '#1a1a1a', fontWeight: 600 }}>Email Address</label>
                             <input
                                 type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
                                 placeholder="Enter your email address"
                                 style={{
                                     padding: '14px 16px',
@@ -64,6 +108,9 @@ function Signup() {
                             <label style={{ fontSize: '0.9rem', color: '#1a1a1a', fontWeight: 600 }}>Password</label>
                             <input
                                 type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
                                 placeholder="Create a password"
                                 style={{
                                     padding: '14px 16px',
@@ -78,15 +125,18 @@ function Signup() {
 
                         <button
                             type="submit"
+                            disabled={loading}
                             className="btn btn-primary"
                             style={{
                                 marginTop: '12px',
                                 padding: '16px',
                                 width: '100%',
                                 justifyContent: 'center',
-                                boxShadow: '0 8px 20px rgba(25, 158, 65, 0.25)'
+                                boxShadow: '0 8px 20px rgba(25, 158, 65, 0.25)',
+                                opacity: loading ? 0.7 : 1,
+                                cursor: loading ? 'not-allowed' : 'pointer'
                             }}>
-                            Create Account
+                            {loading ? 'Creating account...' : 'Create Account'}
                         </button>
                     </form>
 

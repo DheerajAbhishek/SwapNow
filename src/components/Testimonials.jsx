@@ -67,8 +67,8 @@ export default function Testimonials() {
     const row2 = REVIEWS.slice(4, 8);
 
     // Duplicate arrays mathematically so that 50% translation matches perfectly (creating the infinite loop)
-    const duplicatedRow1 = [...row1, ...row1, ...row1, ...row1];
-    const duplicatedRow2 = [...row2, ...row2, ...row2, ...row2];
+    const duplicatedRow1 = [...row1, ...row1];
+    const duplicatedRow2 = [...row2, ...row2];
 
     return (
         <section className="testimonials-section">

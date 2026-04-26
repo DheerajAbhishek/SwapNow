@@ -51,6 +51,7 @@
     flex-wrap: nowrap;
     width: max-content;
     align-items: center;
+    will-change: transform;
 }
 
 /* Animations */
@@ -69,21 +70,21 @@
 
 @keyframes scroll-left-anim {
     from {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
 
     to {
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
     }
 }
 
 @keyframes scroll-right-anim {
     from {
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
     }
 
     to {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -111,7 +112,7 @@
 }
 
 .testi-card:hover {
-    transform: translateY(-6px) scale(1.02);
+    transform: translateY(-6px) scale(1.02) translateZ(0);
 }
 
 /* Header (Avatar & Titles) */

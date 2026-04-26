@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
 import './theme.css'
 import './App.css'
 import SiteHeader from './components/SiteHeader'
@@ -6,35 +8,35 @@ import HeroSection from './components/HeroSection'
 
 import Testimonials from './components/Testimonials'
 // import Dock from './components/Dock'
+import logo from './assets/logos/logo.svg'
 
 import LogoLoop from './components/LogoLoop';
-import cultLogo from './assets/logos/cult-logo.png';
-import weWorkLogo from './assets/logos/weWork.png';
-import springBoardLogo from './assets/logos/91sp.png';
-import isb from './assets/logos/isb.png';
-import ebg from './assets/logos/ebg.jpg';
-import orangeElement from './assets/logos/orangeElement.png';
-import yellowElement from './assets/logos/yellowElement.png';
+import cultLogo from './assets/logos/cult-logo.webp';
+import weWorkLogo from './assets/logos/weWork.webp';
+import springBoardLogo from './assets/logos/91sp.webp';
+import isb from './assets/logos/isb.webp';
+import ebg from './assets/logos/ebg.webp';
+import orangeElement from './assets/logos/orangeElement.webp';
+import yellowElement from './assets/logos/yellowElement.webp';
 import doc from './assets/images/doc.jpeg';
 import del from './assets/images/del.jpeg';
 import bmr from './assets/images/bmr.jpeg';
 import fba from './assets/images/fba.jpeg';
-import fbimg2 from './assets/images/fbimg1.JPG';
-import fbimg1 from './assets/images/fbimg2.JPG';
-import fbimg3 from './assets/images/fbimg3.JPG';
-import food1 from './assets/images/food1.JPG';
-import food2 from './assets/images/food2.JPG';
-import food3 from './assets/images/food3.JPG';
+import fbimg2 from './assets/images/fbimg1.webp';
+import fbimg1 from './assets/images/fbimg2.webp';
+import fbimg3 from './assets/images/fbimg3.webp';
+import food1 from './assets/images/food1.webp';
+import food2 from './assets/images/food2.webp';
+import food3 from './assets/images/food3.webp';
 import secImg1 from './assets/images/secImg1.jpg';
 import secImg2 from './assets/images/secImg2.jpg';
 import secImg3 from './assets/images/secImg3.jpg';
-import secImg4 from './assets/images/secImg4.jpg';
-
+import pontaq from './assets/images/pontaq.png';
 import reelVid2 from './assets/videos/VID_20260423_051433_057.mp4';
-import reelVid1 from './assets/videos/VID_20260423_052410_965.mp4';
-import reelVid3 from './assets/videos/VID_20260423_051130_835.mp4';
+import reelVid1 from './assets/videos/compressed_VID_20260423_052410_965.mp4';
+import reelVid3 from './assets/videos/comp_VID_20260423_051130_835.mp4';
 import reelVid4 from './assets/videos/VID_20260423_051400_630.mp4';
-import fitBarVideo from './assets/videos/firbar.mp4';
+import fitBarVideo from './assets/videos/comp_firbar.mp4';
 
 import CardSwap, { Card } from './components/CardSwap'
 import BmrModal from './components/BmrModal';
@@ -43,39 +45,24 @@ import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/s
 import { VscHeart, VscTools, VscAccount, VscCommentDiscussion, VscPlayCircle } from 'react-icons/vsc'
 
 function HomePage() {
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+
+    const handleProtectedAction = (action) => {
+        if (!isAuthenticated) {
+            navigate('/login');
+            return;
+        }
+        action();
+    };
+
     const [activeCardIndex, setActiveCardIndex] = useState(0);
     const [isBmrModalOpen, setIsBmrModalOpen] = useState(false);
 
     // Reels logic
     const reelVideos = [reelVid1, reelVid2, reelVid3, reelVid4];
-    const [hoveredIndex, setHoveredIndex] = useState(null);
-    const videoRefs = useRef([]);
 
-    useEffect(() => {
-        videoRefs.current.forEach((video, index) => {
-            if (video) {
-                if (index === hoveredIndex) {
-                    video.muted = false; // Always unmute on hover
-                    video.play().catch(e => {
-                        console.log('Unmuted auto-play prevented, forcing mute:', e);
-                        video.muted = true;
-                        video.play().catch(err => console.log('Auto-play completely prevented:', err));
-                    });
-                } else {
-                    video.pause();
-                    video.currentTime = 0; // Reset video to start
-                }
-            }
-        });
-    }, [hoveredIndex]);
-
-    const handleMouseEnter = (index) => {
-        setHoveredIndex(index);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredIndex(null);
-    };
+    // We will handle video play/pause at the element level to avoid React re-renders
 
     useEffect(() => {
         // Logs the font-family currently active on the page body
@@ -84,10 +71,10 @@ function HomePage() {
     }, []);
 
     const buttonConfig = [
-        { label: 'Consult the Doc', onClick: () => console.log('Consult the Doc') },
-        { label: 'Calculate BMR', onClick: () => setIsBmrModalOpen(true) },
-        { label: 'Book a Checkup', onClick: () => console.log('Book a Checkup') },
-        { label: 'Order Now', onClick: () => console.log('Order Now') }
+        { label: 'Consult the Doc', onClick: () => handleProtectedAction(() => console.log('Consult the Doc')) },
+        { label: 'Calculate BMR', onClick: () => handleProtectedAction(() => setIsBmrModalOpen(true)) },
+        { label: 'Book a Checkup', onClick: () => handleProtectedAction(() => console.log('Book a Checkup')) },
+        { label: 'Order Now', onClick: () => handleProtectedAction(() => console.log('Order Now')) }
     ];
 
     // Alternative with image sources
@@ -101,11 +88,11 @@ function HomePage() {
 
     ];
     const dockItems = [
-        { icon: <VscHeart size={24} />, label: 'Meals', onClick: () => window.location.href = '#personalized' },
-        { icon: <VscTools size={24} />, label: 'Tools', onClick: () => window.location.href = '#tools' },
-        { icon: <VscAccount size={24} />, label: 'Doctor', onClick: () => window.location.href = '#doctor' },
-        { icon: <VscCommentDiscussion size={24} />, label: 'Testimonials', onClick: () => window.location.href = '#testimonials' },
-        { icon: <VscPlayCircle size={24} />, label: 'Reels', onClick: () => window.location.href = '#reels' },
+        { icon: <VscHeart size={24} />, label: 'Meals', onClick: () => handleProtectedAction(() => window.location.href = '#personalized') },
+        { icon: <VscTools size={24} />, label: 'Tools', onClick: () => handleProtectedAction(() => window.location.href = '#tools') },
+        { icon: <VscAccount size={24} />, label: 'Doctor', onClick: () => handleProtectedAction(() => window.location.href = '#doctor') },
+        { icon: <VscCommentDiscussion size={24} />, label: 'Testimonials', onClick: () => handleProtectedAction(() => window.location.href = '#testimonials') },
+        { icon: <VscPlayCircle size={24} />, label: 'Reels', onClick: () => handleProtectedAction(() => window.location.href = '#reels') },
     ];
 
     return (
@@ -517,48 +504,73 @@ function HomePage() {
                     {reelVideos.map((videoSrc, index) => (
                         <div
                             key={index}
-                            onMouseEnter={() => handleMouseEnter(index)}
-                            onMouseLeave={handleMouseLeave}
+                            className="reel-card"
+                            onMouseEnter={(e) => {
+                                const v = e.currentTarget.querySelector('video');
+                                if (v) {
+                                    v.muted = false;
+                                    v.play().catch(() => { v.muted = true; v.play(); });
+                                }
+                                e.currentTarget.classList.add('hovered');
+                            }}
+                            onMouseLeave={(e) => {
+                                const v = e.currentTarget.querySelector('video');
+                                if (v) {
+                                    v.pause();
+                                    v.currentTime = 0;
+                                    v.muted = true;
+                                }
+                                e.currentTarget.classList.remove('hovered');
+                            }}
                             style={{
                                 width: '320px',
-                                height: '568px', // aspect ratio 9:16 approx
+                                height: '568px',
                                 overflow: 'hidden',
                                 borderRadius: '16px',
-                                boxShadow: index === hoveredIndex ? '0 15px 35px rgba(0,0,0,0.3)' : '0 15px 35px rgba(0,0,0,0.1)',
+                                boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
                                 position: 'relative',
                                 cursor: 'pointer',
-                                transform: index === hoveredIndex ? 'scale(1.05)' : 'scale(1)',
-                                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                                transform: 'scale(1) translateZ(0)',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                willChange: 'transform'
                             }}
                         >
+                            <style>{`
+                                .reel-card.hovered {
+                                    transform: scale(1.05) translateZ(0) !important;
+                                    box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+                                }
+                                .reel-card.hovered .reel-overlay {
+                                    opacity: 0;
+                                }
+                            `}</style>
                             <video
-                                ref={el => videoRefs.current[index] = el}
                                 src={videoSrc}
-                                loop // Loop the video when playing
-                                muted={index !== hoveredIndex} // Unmute only when hovered
+                                loop
+                                muted
                                 playsInline
+                                preload="metadata"
                                 style={{
                                     width: '100%',
                                     height: '100%',
                                     objectFit: 'cover'
                                 }}
                             />
-                            {/* Overlay to indicate it plays on hover if not hovered */}
-                            {index !== hoveredIndex && (
-                                <div style={{
-                                    position: 'absolute',
-                                    inset: 0,
-                                    backgroundColor: 'rgba(0,0,0,0.3)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'white',
-                                    fontSize: '3rem',
-                                    transition: 'background-color 0.3s ease'
-                                }}>
-                                    <VscPlayCircle />
-                                </div>
-                            )}
+                            {/* Overlay to indicate it plays on hover */}
+                            <div className="reel-overlay" style={{
+                                position: 'absolute',
+                                inset: 0,
+                                backgroundColor: 'rgba(0,0,0,0.3)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'white',
+                                fontSize: '3rem',
+                                transition: 'opacity 0.3s ease, background-color 0.3s ease',
+                                pointerEvents: 'none'
+                            }}>
+                                <VscPlayCircle />
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -584,8 +596,18 @@ function HomePage() {
                     fadeOutColor="#ffffff"
                     ariaLabel="Technology partners"
                 />
+            </div>
 
-
+            {/* Our Investors Section */}
+            <div style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: '#f5f5f5' }}>
+                <h2 style={{ marginBottom: '3rem', color: '#1a1a1a', textTransform: 'uppercase' }}>
+                    Our Investors
+                </h2>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <img src={ebg} alt="EBG Investor" style={{ height: '80px', objectFit: 'contain', transition: 'all 0.3s ease' }} />
+                    <img src={isb} alt="ISB Investor" style={{ height: '80px', objectFit: 'contain', transition: 'all 0.3s ease' }} />
+                    <img src={pontaq} alt="Pontaq Investor" style={{ height: '80px', objectFit: 'contain', transition: 'all 0.3s ease' }} />
+                </div>
             </div>
 
             <footer style={{ backgroundColor: '#1a1a1a', color: '#fff', padding: '5rem 2rem 2rem 2rem', marginTop: '4rem', fontFamily: 'sans-serif' }}>

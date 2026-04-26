@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './Franchise.css';
 import { Link } from 'react-router-dom';
 import logoWithName from '../assets/logos/logoWithName.svg';
-import fitbarImg from '../assets/images/firbar.jpg';
+import fitbarImg from '../assets/images/firbar.webp';
 
 function Franchise() {
     useEffect(() => {
@@ -90,8 +90,8 @@ function Franchise() {
             <section id="partner" className="cta-section">
                 <p className="section-label">Join the Movement</p>
                 <h2>The Future of Health<br />is <span className="accent">Food-Led.</span></h2>
-                <p style={{marginBottom: '40px'}}>The window to partner and capture this ₹5B market is open now. Own a cluster. Build a lasting health business across India.</p>
-                
+                <p style={{ marginBottom: '40px' }}>The window to partner and capture this ₹5B market is open now. Own a cluster. Build a lasting health business across India.</p>
+
                 <div className="onboarding-form fade-up">
                     <h3>Submit Your Interest</h3>
                     <form onSubmit={(e) => { e.preventDefault(); alert("Thanks for your interest! We'll contact you soon."); }}>
