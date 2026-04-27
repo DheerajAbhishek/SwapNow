@@ -15,24 +15,24 @@ const ACTIVITY_LEVELS = [
 ];
 
 const GOALS = [
-  { value: 'bulking',          label: 'Bulking',          icon: '💪', desc: '+400 kcal surplus',      adjust: +400, carbs: 55, protein: 25, fat: 20 },
-  { value: 'cutting',          label: 'Cutting',          icon: '🔥', desc: '−400 kcal deficit',      adjust: -400, carbs: 40, protein: 35, fat: 25 },
-  { value: 'muscle-building',  label: 'Muscle Building',  icon: '⚡', desc: '+400 kcal surplus',      adjust: +400, carbs: 50, protein: 30, fat: 20 },
-  { value: 'eat-healthy',      label: 'Eat Healthy',      icon: '🥗', desc: 'Maintenance calories',   adjust:    0, carbs: 50, protein: 25, fat: 25 },
+  { value: 'bulking',          label: 'Bulking',          icon: 'B', desc: '+400 kcal surplus',      adjust: +400, carbs: 55, protein: 25, fat: 20 },
+  { value: 'cutting',          label: 'Cutting',          icon: 'C', desc: '−400 kcal deficit',      adjust: -400, carbs: 40, protein: 35, fat: 25 },
+  { value: 'muscle-building',  label: 'Muscle Building',  icon: 'MB', desc: '+400 kcal surplus',      adjust: +400, carbs: 50, protein: 30, fat: 20 },
+  { value: 'eat-healthy',      label: 'Eat Healthy',      icon: 'EH', desc: 'Maintenance calories',   adjust:    0, carbs: 50, protein: 25, fat: 25 },
 ];
 
 const MEDICAL_OPTIONS = [
-  { value: 'diabetes', label: 'Diabetes',  icon: '💉', hint: 'Limits rice ≤150g, roti ≤2/meal' },
-  { value: 'pcos',     label: 'PCOS',      icon: '🔄', hint: 'Restricts brown bread' },
-  { value: 'thyroid',  label: 'Thyroid',   icon: '🦋', hint: 'Removes cabbage, cauliflower, broccoli' },
+  { value: 'diabetes', label: 'Diabetes',  icon: 'DIA', hint: 'Limits rice ≤150g, roti ≤2/meal' },
+  { value: 'pcos',     label: 'PCOS',      icon: 'PCOS', hint: 'Restricts brown bread' },
+  { value: 'thyroid',  label: 'Thyroid',   icon: 'THY', hint: 'Removes cabbage, cauliflower, broccoli' },
 ];
 
 const ALLERGY_OPTIONS = [
-  { value: 'lactose',  label: 'Lactose',  icon: '🥛', hint: 'Removes milk, paneer, curd, yoghurt, butter' },
-  { value: 'gluten',   label: 'Gluten',   icon: '🌾', hint: 'Removes oats, brown bread, wrap' },
-  { value: 'seafood',  label: 'Seafood',  icon: '🐟', hint: 'Removes seafood items' },
-  { value: 'nuts',     label: 'Nuts',     icon: '🥜', hint: 'Removes peanut butter, mixed dry fruits' },
-  { value: 'coconut',  label: 'Coconut',  icon: '🥥', hint: 'Removes coconut powder' },
+  { value: 'lactose',  label: 'Lactose',  icon: 'LAC', hint: 'Removes milk, paneer, curd, yoghurt, butter' },
+  { value: 'gluten',   label: 'Gluten',   icon: 'GLU', hint: 'Removes oats, brown bread, wrap' },
+  { value: 'seafood',  label: 'Seafood',  icon: 'SEA', hint: 'Removes seafood items' },
+  { value: 'nuts',     label: 'Nuts',     icon: 'NUT', hint: 'Removes peanut butter, mixed dry fruits' },
+  { value: 'coconut',  label: 'Coconut',  icon: 'COC', hint: 'Removes coconut powder' },
 ];
 
 // Step IDs
@@ -65,7 +65,7 @@ function macroGrams(calories, ratio) {
 function StepBadge({ number, status }) {
   return (
     <span className={`mp-step-badge mp-step-badge--${status}`}>
-      {status === 'done' ? '✓' : number}
+      {status === 'done' ? 'Done' : number}
     </span>
   );
 }
@@ -106,12 +106,12 @@ function MacroRow({ calories, ratio }) {
 
 function MealResultCard({ meal, index }) {
   const [open, setOpen] = useState(index === 0);
-  const MEAL_ICONS = { Breakfast: '🌅', Lunch: '☀️', Dinner: '🌙', 'Mid-Morning Snack': '🍎', 'Evening Snack': '🌆', 'Daily Meal': '🍽️' };
+  const MEAL_ICONS = { Breakfast: 'B', Lunch: 'L', Dinner: 'D', 'Mid-Morning Snack': 'MS', 'Evening Snack': 'ES', 'Daily Meal': 'DM' };
   return (
     <div className="mp-meal-card">
       <button className="mp-meal-card__header" onClick={() => setOpen(o => !o)}>
         <div className="mp-meal-card__left">
-          <span className="mp-meal-card__icon">{MEAL_ICONS[meal.mealName] || '🍽️'}</span>
+          <span className="mp-meal-card__icon">{MEAL_ICONS[meal.mealName] || 'M'}</span>
           <div>
             <h3 className="mp-meal-card__name">{meal.mealName}</h3>
             <p className="mp-meal-card__sub">{meal.totals.calories} kcal · {meal.totals.protein}g protein · {meal.items.length} items</p>
@@ -354,7 +354,7 @@ export default function MealPlannerPage() {
           {step === STEP.LANDING && (
             <div className="mp-card mp-card--landing" ref={el => stepRefs.current[STEP.LANDING] = el}>
               <div className="mp-card__icon-wrap">
-                <span className="mp-card__big-icon">🧬</span>
+                <span className="mp-card__big-icon">BMR</span>
               </div>
               <h2 className="mp-card__title">Let's Start with Your Metabolism</h2>
               <p className="mp-card__desc">
@@ -396,7 +396,7 @@ export default function MealPlannerPage() {
                             className={`mp-toggle-btn ${bmrForm.gender === g ? 'mp-toggle-btn--active' : ''}`}
                             onClick={() => setBmrForm(f => ({ ...f, gender: g }))}
                           >
-                            {g === 'male' ? '♂ Male' : '♀ Female'}
+                            {g === 'male' ? 'Male' : 'Female'}
                           </button>
                         ))}
                       </div>
@@ -602,7 +602,7 @@ export default function MealPlannerPage() {
                         checked={medical.length === 0}
                         onChange={() => toggleMedical('none')}
                       />
-                      <span className="mp-check-card__icon">✅</span>
+                      <span className="mp-check-card__icon">None</span>
                       <span className="mp-check-card__label">None</span>
                       <span className="mp-check-card__hint">No dietary restrictions</span>
                     </label>
@@ -653,7 +653,7 @@ export default function MealPlannerPage() {
                         checked={allergy.length === 0}
                         onChange={() => toggleAllergy('none')}
                       />
-                      <span className="mp-check-card__icon">✅</span>
+                      <span className="mp-check-card__icon">None</span>
                       <span className="mp-check-card__label">None</span>
                       <span className="mp-check-card__hint">No known allergies</span>
                     </label>
@@ -680,9 +680,9 @@ export default function MealPlannerPage() {
 
               <div className="mp-diet-row">
                 {[
-                  { v: 'veg',     l: '🥗 Vegetarian' },
-                  { v: 'non-veg', l: '🍗 Non-Vegetarian' },
-                  { v: 'vegan',   l: '🌱 Vegan' },
+                  { v: 'veg',     l: 'Vegetarian' },
+                  { v: 'non-veg', l: 'Non-Vegetarian' },
+                  { v: 'vegan',   l: 'Vegan' },
                 ].map(({ v, l }) => (
                   <button
                     key={v}
@@ -720,7 +720,7 @@ export default function MealPlannerPage() {
                     <span>Meals</span><strong>3 (Breakfast · Lunch · Dinner)</strong>
                   </div>
                   <div className="mp-summary-box__row">
-                    <span>Vegetables</span><strong>100g mandatory per meal ✓</strong>
+                    <span>Vegetables</span><strong>100g mandatory per meal</strong>
                   </div>
                 </div>
               )}
@@ -734,7 +734,7 @@ export default function MealPlannerPage() {
               >
                 {loading
                   ? <><span className="mp-spinner" /> Generating your plan…</>
-                  : '⚡ Generate My Meal Plan'}
+                  : 'Generate My Meal Plan'}
               </button>
             </div>
           )}
@@ -751,7 +751,7 @@ export default function MealPlannerPage() {
                     {allergy.length > 0 && ` · No ${allergy.join('/')}`}
                   </p>
                 </div>
-                <button className="mp-restart-btn" onClick={restart}>↺ Start Over</button>
+                <button className="mp-restart-btn" onClick={restart}>Start Over</button>
               </div>
 
               {/* Totals card */}
