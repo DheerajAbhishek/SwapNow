@@ -1,10 +1,14 @@
 import logoWithName from '../assets/logos/logoWithName.svg'
 import './SiteHeader.css'
 import { Link, useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 function SiteHeader() {
     const location = useLocation();
     const isFranchise = location.pathname === '/franchise';
+    const { isAuthenticated, user } = useAuth();
+
+    const displayName = user?.username || user?.name || user?.email?.split('@')[0] || 'User';
 
     return (
         <header className="site-header" style={{
@@ -56,12 +60,27 @@ function SiteHeader() {
                     </Link>
                     {!isFranchise && (
                         <>
-                            <Link to="/login" className="btn btn-secondary rizz-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', padding: '8px 24px', fontWeight: '700' }}>
-                                Log in
-                            </Link>
-                            <Link to="/signup" className="btn btn-primary rizz-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', padding: '8px 24px', fontWeight: '700' }}>
-                                Sign up
-                            </Link>
+                            {isAuthenticated ? (
+                                <div style={{
+                                    borderRadius: '9999px',
+                                    padding: '8px 18px',
+                                    fontWeight: '700',
+                                    color: '#0f172a',
+                                    backgroundColor: '#eef2ff',
+                                    border: '1px solid #c7d2fe'
+                                }}>
+                                    {displayName}
+                                </div>
+                            ) : (
+                                <>
+                                    <Link to="/login" className="btn btn-secondary rizz-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', padding: '8px 24px', fontWeight: '700' }}>
+                                        Log in
+                                    </Link>
+                                    <Link to="/signup" className="btn btn-primary rizz-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', padding: '8px 24px', fontWeight: '700' }}>
+                                        Sign up
+                                    </Link>
+                                </>
+                            )}
                         </>
                     )}
                 </div>

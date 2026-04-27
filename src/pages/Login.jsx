@@ -17,7 +17,8 @@ function Login() {
         setLoading(true);
 
         try {
-            const response = await fetch(`/api/auth/login`, {
+            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+            const response = await fetch(`${apiUrl}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -39,8 +40,6 @@ function Login() {
     };
 
     const handleGoogleLogin = () => {
-        // Here you would typically integrate with AWS Cognito Google Provider UI
-        // For demonstration purposes, we are simulating a successful login
         login({ name: 'Google User', email: 'test@example.com' });
         navigate('/');
     };

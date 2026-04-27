@@ -1,0 +1,839 @@
+/* ═══════════════════════════════════════════════════════════════
+   Swapnow – Meal Planner Multi-Step Wizard
+   Brand: #063847 dark | #199E41 green | #F78757 orange
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.mp-main {
+  min-height: 100vh;
+  padding: 100px 20px 80px;
+  background: #f5f8f6;
+}
+
+.mp-wizard {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.mp-hero {
+  max-width: 680px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.mp-hero__tag {
+  display: inline-block;
+  background: #e6f4ec;
+  color: #199E41;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
+.mp-hero__title {
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 800;
+  color: #063847;
+  margin: 0 0 12px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.mp-hero__accent { color: #199E41; }
+
+.mp-hero__sub {
+  font-size: 1rem;
+  color: #4a6272;
+  line-height: 1.65;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ── Completed Step ───────────────────────────────────────── */
+.mp-completed-step {
+  background: #fff;
+  border: 1.5px solid #d4e9de;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mp-completed-step__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.mp-completed-step__title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #6b8a96;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.mp-completed-step__summary {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #063847;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mp-edit-btn {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #199E41;
+  background: none;
+  border: 1.5px solid #c3e6cc;
+  border-radius: 8px;
+  padding: 5px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.mp-edit-btn:hover { background: #e6f4ec; }
+
+/* ── Step Badge ───────────────────────────────────────────── */
+.mp-step-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mp-step-badge--active { background: #199E41; color: #fff; }
+.mp-step-badge--done   { background: #e6f4ec; color: #199E41; }
+
+/* ── Active Card ──────────────────────────────────────────── */
+.mp-card {
+  background: #fff;
+  border: 1.5px solid #e2ebe8;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 4px 24px rgba(6, 56, 71, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: mp-fade-in 0.25s ease;
+}
+
+@keyframes mp-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mp-card--landing {
+  text-align: center;
+  padding: 48px 32px;
+  gap: 20px;
+}
+
+.mp-card__icon-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.mp-card__big-icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.mp-card__step-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.mp-card__title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #063847;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.mp-card__desc {
+  font-size: 0.9rem;
+  color: #6b8a96;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Forms ────────────────────────────────────────────────── */
+.mp-form { display: flex; flex-direction: column; gap: 18px; }
+
+.mp-field { display: flex; flex-direction: column; gap: 7px; }
+
+.mp-field-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.mp-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #063847;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mp-unit {
+  font-weight: 500;
+  color: #9bb5c0;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.8rem;
+}
+
+.mp-input {
+  padding: 12px 14px;
+  border: 1.5px solid #d4e3de;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #063847;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mp-input:focus {
+  border-color: #199E41;
+  box-shadow: 0 0 0 3px rgba(25, 158, 65, 0.1);
+}
+
+.mp-input::placeholder { color: #b0c8d2; }
+
+/* ── Toggle (Gender) ──────────────────────────────────────── */
+.mp-toggle-row { display: flex; gap: 10px; }
+
+.mp-toggle-btn {
+  flex: 1;
+  padding: 12px;
+  border: 1.5px solid #d4e3de;
+  border-radius: 10px;
+  background: #f4f8f6;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #063847;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mp-toggle-btn:hover { border-color: #199E41; background: #edf6f0; }
+.mp-toggle-btn--active { background: #199E41; border-color: #199E41; color: #fff; }
+
+/* ── BMR Result Inline ────────────────────────────────────── */
+.mp-bmr-result {
+  background: #063847;
+  border-radius: 14px;
+  padding: 20px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mp-bmr-result__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+.mp-bmr-result__value {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.mp-bmr-result__value span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  margin-left: 4px;
+}
+
+.mp-bmr-result__note {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── Inline stat ──────────────────────────────────────────── */
+.mp-inline-stat {
+  font-size: 0.9rem;
+  color: #6b8a96;
+  background: #f4f8f6;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.mp-inline-stat strong { color: #063847; }
+
+/* ── Loading row ──────────────────────────────────────────── */
+.mp-loading-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #6b8a96;
+}
+
+/* ── Activity List ─────────────────────────────────────────── */
+.mp-activity-list { display: flex; flex-direction: column; gap: 8px; }
+
+.mp-activity-btn {
+  background: #f4f8f6;
+  border: 1.5px solid #d4e3de;
+  border-radius: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: inherit;
+}
+
+.mp-activity-btn:hover:not(:disabled) { border-color: #199E41; background: #edf6f0; }
+
+.mp-activity-btn--active {
+  border-color: #199E41;
+  background: #e6f4ec;
+  box-shadow: 0 0 0 3px rgba(25, 158, 65, 0.1);
+}
+
+.mp-activity-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.mp-activity-btn__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mp-activity-btn__label { font-size: 0.95rem; font-weight: 700; color: #063847; }
+.mp-activity-btn__mult  { font-size: 0.82rem; font-weight: 700; color: #9bb5c0; }
+.mp-activity-btn__desc  { font-size: 0.82rem; color: #6b8a96; }
+.mp-activity-btn__tdee  { font-size: 0.82rem; font-weight: 700; color: #199E41; margin-top: 4px; }
+
+/* ── Goal Grid ─────────────────────────────────────────────── */
+.mp-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.mp-goal-btn {
+  background: #f4f8f6;
+  border: 1.5px solid #d4e3de;
+  border-radius: 14px;
+  padding: 16px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.mp-goal-btn:hover { border-color: #199E41; background: #edf6f0; }
+
+.mp-goal-btn--active {
+  border-color: #199E41;
+  background: #e6f4ec;
+  box-shadow: 0 0 0 3px rgba(25, 158, 65, 0.1);
+}
+
+.mp-goal-btn__icon  { font-size: 1.5rem; line-height: 1; margin-bottom: 4px; }
+.mp-goal-btn__label { font-size: 1rem; font-weight: 700; color: #063847; }
+.mp-goal-btn__desc  { font-size: 0.8rem; color: #6b8a96; }
+.mp-goal-btn__cal   { font-size: 0.85rem; font-weight: 700; color: #F78757; margin-top: 4px; }
+
+/* ── Goal Macros Preview ──────────────────────────────────── */
+.mp-goal-macros {
+  background: #f4f8f6;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mp-goal-macros__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: #6b8a96;
+}
+
+.mp-goal-macros__cal { font-weight: 700; color: #063847; }
+
+/* ── Macro bar ─────────────────────────────────────────────── */
+.mp-macro-row { display: flex; flex-direction: column; gap: 8px; }
+
+.mp-macro-bar {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e2ebe8;
+  display: flex;
+}
+
+.mp-macro-bar__c { background: #3b82f6; transition: width 0.3s; }
+.mp-macro-bar__p { background: #199E41; transition: width 0.3s; }
+.mp-macro-bar__f { background: #F78757; transition: width 0.3s; }
+
+.mp-macro-legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: #4a6272;
+}
+
+.mp-macro-legend span { display: flex; align-items: center; gap: 5px; }
+
+.mp-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.mp-dot--c { background: #3b82f6; }
+.mp-dot--p { background: #199E41; }
+.mp-dot--f { background: #F78757; }
+
+/* ── Checkbox Cards ────────────────────────────────────────── */
+.mp-check-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.mp-check-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 16px;
+  border: 1.5px solid #d4e3de;
+  border-radius: 12px;
+  background: #f4f8f6;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.mp-check-card input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.mp-check-card:hover { border-color: #199E41; background: #edf6f0; }
+
+.mp-check-card--on {
+  border-color: #199E41;
+  background: #e6f4ec;
+  box-shadow: 0 0 0 3px rgba(25, 158, 65, 0.1);
+}
+
+.mp-check-card--none { border-style: dashed; }
+
+.mp-check-card__icon  { font-size: 1.4rem; line-height: 1; margin-bottom: 2px; }
+.mp-check-card__label { font-size: 0.92rem; font-weight: 700; color: #063847; }
+.mp-check-card__hint  { font-size: 0.75rem; color: #6b8a96; line-height: 1.3; }
+
+/* ── Diet Row ──────────────────────────────────────────────── */
+.mp-diet-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.mp-diet-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 16px;
+  border: 1.5px solid #d4e3de;
+  border-radius: 10px;
+  background: #f4f8f6;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #063847;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mp-diet-btn:hover { border-color: #199E41; background: #edf6f0; }
+.mp-diet-btn--active { background: #199E41; border-color: #199E41; color: #fff; }
+
+/* ── Summary Box ──────────────────────────────────────────── */
+.mp-summary-box {
+  background: #f4f8f6;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mp-summary-box__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.88rem;
+}
+
+.mp-summary-box__row span { color: #6b8a96; }
+.mp-summary-box__row strong { color: #063847; text-transform: capitalize; }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.mp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 50px;
+}
+
+.mp-btn--primary {
+  background: linear-gradient(135deg, #199E41, #0e7f33);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(25, 158, 65, 0.25);
+}
+
+.mp-btn--primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(25, 158, 65, 0.35);
+}
+
+.mp-btn--primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.mp-btn--lg { padding: 18px 36px; font-size: 1.1rem; border-radius: 14px; }
+.mp-btn--sm { padding: 10px 20px; font-size: 0.9rem; }
+
+.mp-btn--generate {
+  background: linear-gradient(135deg, #F78757, #e06030);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(247, 135, 87, 0.3);
+  font-size: 1.05rem;
+  padding: 16px 24px;
+}
+
+.mp-btn--generate:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(247, 135, 87, 0.4);
+}
+
+.mp-btn--generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* ── Spinner ──────────────────────────────────────────────── */
+.mp-spinner {
+  width: 18px; height: 18px;
+  border: 2.5px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: mp-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes mp-spin { to { transform: rotate(360deg); } }
+
+/* ── Error ─────────────────────────────────────────────────── */
+.mp-error {
+  padding: 12px 16px;
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+/* ── Results ──────────────────────────────────────────────── */
+.mp-results {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: mp-fade-in 0.3s ease;
+}
+
+.mp-results__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mp-results__title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #063847;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.mp-results__meta {
+  font-size: 0.85rem;
+  color: #6b8a96;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.mp-restart-btn {
+  background: #f4f8f6;
+  border: 1.5px solid #d4e3de;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #063847;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.mp-restart-btn:hover { border-color: #199E41; }
+
+/* ── Totals ────────────────────────────────────────────────── */
+.mp-totals {
+  background: #063847;
+  border-radius: 18px;
+  padding: 20px 24px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mp-totals__header { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.mp-totals__badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.mp-totals__badge--actual { color: #7de8a0; }
+
+.mp-totals__nums {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.mp-totals__nums em {
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  margin-left: 2px;
+}
+
+.mp-totals__divider {
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+}
+
+.mp-totals__macro-bar { margin-top: 4px; }
+.mp-totals__macro-bar .mp-macro-legend { color: rgba(255,255,255,0.55); }
+
+/* ── Meal Cards ────────────────────────────────────────────── */
+.mp-meals { display: flex; flex-direction: column; gap: 10px; }
+
+.mp-meal-card {
+  background: #fff;
+  border: 1px solid #e2ebe8;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(6,56,71,0.04);
+}
+
+.mp-meal-card__header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.mp-meal-card__header:hover { background: #f8fbfa; }
+
+.mp-meal-card__left { display: flex; align-items: center; gap: 14px; }
+
+.mp-meal-card__icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.mp-meal-card__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #063847;
+  margin: 0 0 2px;
+}
+
+.mp-meal-card__sub {
+  font-size: 0.82rem;
+  color: #6b8a96;
+  margin: 0;
+  font-weight: 600;
+}
+
+.mp-chevron {
+  font-size: 1.2rem;
+  color: #9bb5c0;
+  transition: transform 0.2s;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.mp-chevron--up { transform: rotate(-180deg); }
+
+.mp-meal-card__body {
+  border-top: 1px solid #f0f6f3;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Nutrient Pills ─────────────────────────────────────────── */
+.mp-meal-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.mp-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 10px;
+  min-width: 65px;
+}
+
+.mp-pill--cal { background: #fff5ee; }
+.mp-pill--pro { background: #e6f4ec; }
+.mp-pill--car { background: #eff6ff; }
+.mp-pill--fat { background: #fff8f0; }
+
+.mp-pill__v { font-size: 1.05rem; font-weight: 800; color: #063847; line-height: 1; }
+.mp-pill__u { font-size: 0.68rem; color: #9bb5c0; font-weight: 600; }
+.mp-pill__l { font-size: 0.7rem;  color: #6b8a96; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
+
+/* ── Food Table ─────────────────────────────────────────────── */
+.mp-table-wrap { overflow-x: auto; }
+
+.mp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.mp-table th {
+  text-align: left;
+  padding: 8px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9bb5c0;
+  border-bottom: 1px solid #e8f0ed;
+}
+
+.mp-table td {
+  padding: 9px 10px;
+  color: #2d4a54;
+  border-bottom: 1px solid #f4f8f6;
+}
+
+.mp-table tbody tr:last-child td { border-bottom: none; }
+.mp-table tbody tr:hover td { background: #f8fbfa; }
+
+.mp-table__food { font-weight: 600; color: #063847; display: flex; align-items: center; gap: 6px; }
+
+.mp-table__veg-row td { background: #f8fdf9; }
+.mp-table__veg-row:hover td { background: #f0faf3; }
+
+.mp-veg-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #199E41;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+/* ── Disclaimer ─────────────────────────────────────────────── */
+.mp-disclaimer {
+  font-size: 0.78rem;
+  color: #9bb5c0;
+  line-height: 1.5;
+  border-top: 1px solid #e2ebe8;
+  padding-top: 12px;
+  margin: 0;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 580px) {
+  .mp-card { padding: 20px 16px; }
+  .mp-field-row { grid-template-columns: 1fr 1fr; }
+  .mp-field-row .mp-field:last-child { grid-column: 1 / -1; }
+  .mp-goal-grid { grid-template-columns: 1fr 1fr; }
+  .mp-check-grid { grid-template-columns: 1fr 1fr; }
+  .mp-totals__header { flex-direction: column; gap: 8px; }
+  .mp-totals__badge { width: auto; }
+}
+
+@media (max-width: 380px) {
+  .mp-goal-grid { grid-template-columns: 1fr; }
+}

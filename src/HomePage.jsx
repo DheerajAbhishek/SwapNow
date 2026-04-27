@@ -44,7 +44,7 @@ import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/s
 
 import { VscHeart, VscTools, VscAccount, VscCommentDiscussion, VscPlayCircle } from 'react-icons/vsc'
 
-function HomePage() {
+function HomePage({ openBmrCalculator = false }) {
     const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ function HomePage() {
     };
 
     const [activeCardIndex, setActiveCardIndex] = useState(0);
-    const [isBmrModalOpen, setIsBmrModalOpen] = useState(false);
+    const [isBmrModalOpen, setIsBmrModalOpen] = useState(openBmrCalculator);
 
     // Reels logic
     const reelVideos = [reelVid1, reelVid2, reelVid3, reelVid4];
@@ -70,9 +70,15 @@ function HomePage() {
         console.log('Site is currently using the following font-family on body:', bodyFont);
     }, []);
 
+    useEffect(() => {
+        if (openBmrCalculator) {
+            setIsBmrModalOpen(true);
+        }
+    }, [openBmrCalculator]);
+
     const buttonConfig = [
         { label: 'Consult the Doc', onClick: () => handleProtectedAction(() => console.log('Consult the Doc')) },
-        { label: 'Calculate BMR', onClick: () => handleProtectedAction(() => setIsBmrModalOpen(true)) },
+        { label: 'Calculate BMR', onClick: () => handleProtectedAction(() => navigate('/meal-planner')) },
         { label: 'Book a Checkup', onClick: () => handleProtectedAction(() => console.log('Book a Checkup')) },
         { label: 'Order Now', onClick: () => handleProtectedAction(() => console.log('Order Now')) }
     ];

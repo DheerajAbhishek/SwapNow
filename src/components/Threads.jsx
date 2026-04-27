@@ -120,16 +120,46 @@ void main() {
 }
 `;
 
+function canUseWebGL() {
+    try {
+        const canvas = document.createElement('canvas');
+        return !!(
+            canvas.getContext('webgl') ||
+            canvas.getContext('experimental-webgl')
+        );
+    } catch {
+        return false;
+    }
+}
+
 const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseInteraction = false, ...rest }) => {
     const containerRef = useRef(null);
     const animationFrameId = useRef();
 
     useEffect(() => {
         if (!containerRef.current) return;
-        const container = containerRef.current;
+        if (!canUseWebGL()) {
+            console.warn('Threads: WebGL is not available in this browser/device.');
+            return;
+        }
 
-        const renderer = new Renderer({ alpha: true });
-        const gl = renderer.gl;
+        const container = containerRef.current;
+        let renderer;
+        let gl;
+
+        try {
+            renderer = new Renderer({ alpha: true });
+            gl = renderer.gl;
+
+            if (!gl) {
+                console.warn('Threads: failed to initialize WebGL renderer.');
+                return;
+            }
+        } catch (error) {
+            console.warn('Threads: renderer initialization failed.', error);
+            return;
+        }
+
         gl.clearColor(0, 0, 0, 0);
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -155,6 +185,8 @@ const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseIn
 
         function resize() {
             const { clientWidth, clientHeight } = container;
+            if (!clientWidth || !clientHeight) return;
+
             renderer.setSize(clientWidth, clientHeight);
             program.uniforms.iResolution.value.r = clientWidth;
             program.uniforms.iResolution.value.g = clientHeight;

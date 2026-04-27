@@ -1,0 +1,8 @@
+{
+  "resource": "/auth/login",
+  "httpMethod": "POST",
+  "headers": {
+    "origin": "http://localhost:5173"
+  },
+  "body": "{\"email\":\"nonexistent@example.com\",\"password\":\"wrongpass\"}"
+}

@@ -1,0 +1,1 @@
+{"statusCode":401,"headers":{"Content-Type":"application/json","Access-Control-Allow-Origin":"http://localhost:5173","Access-Control-Allow-Methods":"POST, OPTIONS","Access-Control-Allow-Headers":"Content-Type, X-Amz-Date, Authorization, X-Api-Key, X-Amz-Security-Token","Vary":"Origin"},"body":"{\"error\":\"Invalid credentials\"}"}

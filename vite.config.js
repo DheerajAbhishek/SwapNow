@@ -13,11 +13,19 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // /api/auth/login  →  https://9k89rrvfn9.execute-api.ap-south-1.amazonaws.com/PROD/auth/login
-      '/api': {
+      // Keep auth endpoints on the auth API Gateway
+      '/api/auth': {
         target: 'https://9k89rrvfn9.execute-api.ap-south-1.amazonaws.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '/PROD'),
+      },
+
+      // Route meal planner APIs to the meal-planner API Gateway
+      // /api/calculate-bmr -> https://nwneniqthj.execute-api.ap-south-1.amazonaws.com/Prod/calculate-bmr
+      '/api': {
+        target: 'https://nwneniqthj.execute-api.ap-south-1.amazonaws.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '/Prod'),
       }
     }
   }

@@ -7,23 +7,34 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Check local storage or AWS Cognito tokens here.
-    // For now, simple mock based on local storage
     const token = localStorage.getItem('mockToken');
+    const storedUser = localStorage.getItem('mockUser');
+
     if (token) {
       setIsAuthenticated(true);
-      setUser({ name: 'User' });
+
+      if (storedUser) {
+        try {
+          setUser(JSON.parse(storedUser));
+        } catch {
+          setUser({ name: 'User' });
+        }
+      } else {
+        setUser({ name: 'User' });
+      }
     }
   }, []);
 
   const login = (userData) => {
     localStorage.setItem('mockToken', 'mock-token-xyz');
+    localStorage.setItem('mockUser', JSON.stringify(userData || {}));
     setIsAuthenticated(true);
     setUser(userData);
   };
 
   const logout = () => {
     localStorage.removeItem('mockToken');
+    localStorage.removeItem('mockUser');
     setIsAuthenticated(false);
     setUser(null);
   };
