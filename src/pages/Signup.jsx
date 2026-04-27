@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 
+const AUTH_API_BASE =
+    import.meta.env.VITE_AUTH_API_URL ||
+    (window.location.hostname === 'localhost'
+        ? '/api/auth'
+        : 'https://9k89rrvfn9.execute-api.ap-south-1.amazonaws.com/PROD/auth');
+
 function Signup() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
@@ -16,7 +22,7 @@ function Signup() {
         setLoading(true);
 
         try {
-            const response = await fetch(`/api/auth/signup`, {
+            const response = await fetch(`${AUTH_API_BASE}/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: name, email, password })

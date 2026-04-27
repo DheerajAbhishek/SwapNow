@@ -3,6 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 import { useAuth } from '../context/AuthContext';
 
+const AUTH_API_BASE =
+    import.meta.env.VITE_AUTH_API_URL ||
+    (window.location.hostname === 'localhost'
+        ? '/api/auth'
+        : 'https://9k89rrvfn9.execute-api.ap-south-1.amazonaws.com/PROD/auth');
+
 function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -17,8 +23,7 @@ function Login() {
         setLoading(true);
 
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-            const response = await fetch(`${apiUrl}/auth/login`, {
+            const response = await fetch(`${AUTH_API_BASE}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
