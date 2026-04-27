@@ -3,10 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 
 const AUTH_API_BASE =
-    import.meta.env.VITE_AUTH_API_URL ||
-    (window.location.hostname === 'localhost'
-        ? '/api/auth'
-        : 'https://9k89rrvfn9.execute-api.ap-south-1.amazonaws.com/PROD/auth');
+    import.meta.env.VITE_AUTH_API_URL || '/api/auth';
 
 function Signup() {
     const navigate = useNavigate();

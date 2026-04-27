@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/auth/:path*",
+      "destination": "https://9k89rrvfn9.execute-api.ap-south-1.amazonaws.com/PROD/auth/:path*"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "https://nwneniqthj.execute-api.ap-south-1.amazonaws.com/Prod/:path*"
+    }
+  ]
+}

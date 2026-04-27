@@ -4,10 +4,7 @@ import SiteHeader from '../components/SiteHeader';
 import { useAuth } from '../context/AuthContext';
 
 const AUTH_API_BASE =
-    import.meta.env.VITE_AUTH_API_URL ||
-    (window.location.hostname === 'localhost'
-        ? '/api/auth'
-        : 'https://9k89rrvfn9.execute-api.ap-south-1.amazonaws.com/PROD/auth');
+    import.meta.env.VITE_AUTH_API_URL || '/api/auth';
 
 function Login() {
     const { login } = useAuth();
