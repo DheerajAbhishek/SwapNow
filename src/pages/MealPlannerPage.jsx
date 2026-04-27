@@ -47,6 +47,9 @@ const STEP = {
   RESULTS:  7,
 };
 
+const MEAL_API_BASE = import.meta.env.VITE_MEAL_API_URL || '/api';
+const MEAL_API_FALLBACK = 'https://nwneniqthj.execute-api.ap-south-1.amazonaws.com/Prod';
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function fmt(n) { return Number(n).toLocaleString('en-IN'); }
@@ -212,6 +215,19 @@ export default function MealPlannerPage() {
     return null;
   }
 
+  const requestMealApi = async (path, options) => {
+    const primaryUrl = `${MEAL_API_BASE}${path}`;
+    try {
+      return await fetch(primaryUrl, options);
+    } catch (error) {
+      // If local dev proxy is down, retry against the deployed API endpoint.
+      if (MEAL_API_BASE === '/api') {
+        return fetch(`${MEAL_API_FALLBACK}${path}`, options);
+      }
+      throw error;
+    }
+  };
+
   // ── API calls ──────────────────────────────────────────────────────────
 
   const handleBMRSubmit = async (e) => {
@@ -219,7 +235,7 @@ export default function MealPlannerPage() {
     setError(null);
     setLoading(true);
     try {
-      const res  = await fetch('/api/calculate-bmr', {
+      const res  = await requestMealApi('/calculate-bmr', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -245,7 +261,7 @@ export default function MealPlannerPage() {
     setActivity(lvl);
     setLoading(true);
     try {
-      const res  = await fetch('/api/calculate-tdee', {
+      const res  = await requestMealApi('/calculate-tdee', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ bmr, activityLevel: lvl.value }),
@@ -285,7 +301,7 @@ export default function MealPlannerPage() {
     setLoading(true);
     try {
       const g = goal || GOALS[2];
-      const res = await fetch('/api/generate-meal-plan', {
+      const res = await requestMealApi('/generate-meal-plan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
