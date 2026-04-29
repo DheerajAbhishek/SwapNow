@@ -1,14 +1,20 @@
-import logoWithName from '../assets/logos/logoWithName.svg'
+import logoWithName from '../assets/logos/logo.png'
 import './SiteHeader.css'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 function SiteHeader() {
     const location = useLocation();
+    const navigate = useNavigate();
     const isFranchise = location.pathname === '/franchise';
-    const { isAuthenticated, user } = useAuth();
+    const { isAuthenticated, user, logout } = useAuth();
 
     const displayName = user?.username || user?.name || user?.email?.split('@')[0] || 'User';
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
     return (
         <header className="site-header" style={{
@@ -35,7 +41,7 @@ function SiteHeader() {
                 width: '100%'
             }}>
                 <Link to="/" className="brand-mark" aria-label="Swapnow home" style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src={logoWithName} alt="Swapnow" style={{ height: '36px', transition: 'transform 0.3s ease', marginLeft: '36px' }} onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.target.style.transform = 'scale(1)'} />
+                    <img src={logoWithName} alt="Swapnow" style={{ height: '36px', transition: 'transform 0.3s ease', marginLeft: '36px', scale: '5' }} onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.target.style.transform = 'scale(1)'} />
                 </Link>
                 <div className="site-header-actions" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                     <Link to="/franchise"
@@ -61,16 +67,30 @@ function SiteHeader() {
                     {!isFranchise && (
                         <>
                             {isAuthenticated ? (
-                                <div style={{
-                                    borderRadius: '9999px',
-                                    padding: '8px 18px',
-                                    fontWeight: '700',
-                                    color: '#0f172a',
-                                    backgroundColor: '#eef2ff',
-                                    border: '1px solid #c7d2fe'
-                                }}>
-                                    {displayName}
-                                </div>
+                                <>
+                                    <div style={{
+                                        borderRadius: '9999px',
+                                        padding: '8px 18px',
+                                        fontWeight: '700',
+                                        color: '#0f172a',
+                                        backgroundColor: '#eef2ff',
+                                        border: '1px solid #c7d2fe'
+                                    }}>
+                                        {displayName}
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={handleLogout}
+                                        className="btn btn-secondary rizz-btn"
+                                        style={{
+                                            borderRadius: '9999px',
+                                            padding: '8px 24px',
+                                            fontWeight: '700'
+                                        }}
+                                    >
+                                        Logout
+                                    </button>
+                                </>
                             ) : (
                                 <>
                                     <Link to="/login" className="btn btn-secondary rizz-btn" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', padding: '8px 24px', fontWeight: '700' }}>

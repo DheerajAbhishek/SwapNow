@@ -39,6 +39,8 @@ import reelVid4 from './assets/videos/VID_20260423_051400_630.mp4';
 import fitBarVideo from './assets/videos/comp_firbar.mp4';
 
 import CardSwap, { Card } from './components/CardSwap'
+import ScrollStack, { ScrollStackItem } from './components/ScrollStack'
+
 import BmrModal from './components/BmrModal';
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 
@@ -78,7 +80,7 @@ function HomePage({ openBmrCalculator = false }) {
 
     const buttonConfig = [
         { label: 'Consult the Doc', onClick: () => handleProtectedAction(() => console.log('Consult the Doc')) },
-        { label: 'Calculate BMR', onClick: () => handleProtectedAction(() => navigate('/meal-planner')) },
+        { label: 'Calculate BMR', onClick: () => navigate('/meal-planner') },
         { label: 'Book a Checkup', onClick: () => handleProtectedAction(() => console.log('Book a Checkup')) },
         { label: 'Order Now', onClick: () => handleProtectedAction(() => console.log('Order Now')) }
     ];
@@ -109,7 +111,7 @@ function HomePage({ openBmrCalculator = false }) {
 
             <HeroSection />
 
-            <div className='imgs' style={{ height: '600px', position: 'relative' }}>
+            <div className='imgs' style={{ height: '89vh', position: 'relative', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                 <img
                     src={orangeElement}
                     alt="Orange Decoration"
@@ -119,267 +121,175 @@ function HomePage({ openBmrCalculator = false }) {
                         left: '0px',
                         width: '217px',
                         zIndex: 0,
-
+                        pointerEvents: 'none',
                     }}
                 />
-                <h1 style={{
+                <div style={{
                     padding: '4rem 7rem 2rem 7rem',
-                    fontSize: 'clamp(2.5rem, 5vw, 4rem)', // Fixed: camelCase
-                    lineHeight: '1.1',
-                    marginBottom: '1.5rem',
-                    fontWeight: '800', // Fixed: comma instead of semicolon
-                    color: '#1a1a1a' // Fixed: added a color or you can remove the line
+                    position: 'relative',
+                    zIndex: 10,
+                    textAlign: 'center',
                 }}>
-                    How we play!
-                </h1>
-                <div style={{ textAlign: 'center', marginBottom: '2rem', zIndex: 10, position: 'relative' }}>
-                    <button className="primary-button" style={{
-                        padding: '16px 32px',
-                        borderRadius: '30px',
-                        border: 'none',
-                        backgroundColor: '#1a1a1a',
-                        color: '#fff',
-                        fontSize: '1.1rem',
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                        transition: 'transform 0.2s ease, background-color 0.2s ease',
-                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
-                        position: 'relative',
-                        right: '29%',
-                        top: '30px'
-                    }}
-                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
-                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
-                        onClick={buttonConfig[activeCardIndex]?.onClick}
-                    >
-                        {buttonConfig[activeCardIndex]?.label}
-                    </button>
+                    <h1 style={{
+                        fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                        lineHeight: '1.1',
+                        margin: 0,
+                        fontWeight: '800',
+                        color: '#1a1a1a',
+                    }}>
+                        How we play!
+                    </h1>
                 </div>
-                <CardSwap
-                    cardDistance={60}
-                    verticalDistance={70}
-                    delay={5000}
-                    pauseOnHover={true}
-                    onActiveIndexChange={(newIndex) => setActiveCardIndex(newIndex)}
-                >
-                    <Card style={{
-                        width: '100%',
-                        maxWidth: '800px',
-                        borderRadius: '24px',
-                        overflow: 'hidden',
-                        boxShadow: '0 20px 40px rgba(0,0,0,0.06)',
-                        border: '1px solid #f0f0f0',
-                        backgroundColor: '#fff',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
-                        {/* 1. Title at the very top */}
-                        <div style={{ padding: '20px 32px 20px 32px' }}>
-                            <h3 style={{
-                                fontSize: '24px',
-                                fontWeight: '400',
-                                color: '#1a1a1a',
-                                margin: 0,
-                                lineHeight: '1.2',
 
-                            }}>
-                                Professional Clinical Consultation
-                            </h3>
-                        </div>
+                <div style={{ flex: 1, minHeight: 0, position: 'relative', zIndex: 1 }}>
+                    {/*
+                      scrollLimit controls how far (in px) the user scrolls
+                      inside this section before the page takes over.
+                      ─────────────────────────────────────────────────────
+                      Rule of thumb: cards × card height + breathing room
+                        3 cards × 320 px + 200 px ≈ 1160 px
+                      ─────────────────────────────────────────────────────
+                      Lower  → faster hand-off  (e.g. 600)
+                      Higher → more animation   (e.g. 1400)
+                    */}
+                    <ScrollStack scrollLimit={1500} topOffset={-100} cardMaxWidth="1300px" /* onActiveCardChange={(index) => setActiveCardIndex(index)} */>
+                        <ScrollStackItem>
+                            <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                                <div style={{ flex: '1', textAlign: 'left' }}>
+                                    <h3 style={{ fontSize: '24px', fontWeight: '400', color: '#1a1a1a', margin: '0 0 16px 0', lineHeight: '1.2' }}>
+                                        Professional Clinical Consultation
+                                    </h3>
+                                    <p style={{ color: '#555', fontSize: '1.1rem', lineHeight: '1.7', margin: '0 0 24px 0' }}>
+                                        Skip the guesswork. Dedicated doctor consultations and targeted blood panels to map your metabolic markers with clinical precision.
+                                    </p>
+                                    <button className="primary-button" style={{
+                                        padding: '12px 24px',
+                                        borderRadius: '30px',
+                                        border: 'none',
+                                        backgroundColor: '#1a1a1a',
+                                        color: '#fff',
+                                        fontSize: '1rem',
+                                        fontWeight: '600',
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.2s ease, background-color 0.2s ease',
+                                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                                    }}
+                                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
+                                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
+                                        onClick={buttonConfig[0].onClick}
+                                    >
+                                        {buttonConfig[0].label}
+                                    </button>
+                                </div>
+                                <div style={{ flex: '1', backgroundColor: '#f9f9f9', borderRadius: '12px', overflow: 'hidden' }}>
+                                    <img src={doc} alt="Doctor" style={{ width: '100%', display: 'block', borderRadius: '12px', objectFit: 'cover' }} />
+                                </div>
+                            </div>
+                        </ScrollStackItem>
 
-                        {/* 2. Full Image in the middle */}
-                        <div style={{ width: '100%', height: '71%', backgroundColor: '#f9f9f9' }}>
-                            <img
-                                src={doc}
-                                alt="Doctor"
-                                style={{
-                                    width: '86%',
-                                    height: '93%', // Allows the full image to show without cropping
-                                    display: 'block',
-                                    paddingLeft: '50px',
-                                    borderRadius: '12px'
-                                }}
-                            />
-                        </div>
+                        <ScrollStackItem>
+                            <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                                <div style={{ flex: '1', textAlign: 'left' }}>
+                                    <h3 style={{ fontSize: '24px', fontWeight: '400', color: '#1a1a1a', margin: '0 0 16px 0', lineHeight: '1.2' }}>
+                                        BMR-Driven Macro Mapping
+                                    </h3>
+                                    <p style={{ color: '#555', fontSize: '1.1rem', lineHeight: '1.7', margin: '0 0 24px 0' }}>
+                                        Using your Basal Metabolic Rate and clinical data, our experts engineer a precise nutritional roadmap of calories and macros.
+                                    </p>
+                                    <button className="primary-button" style={{
+                                        padding: '12px 24px',
+                                        borderRadius: '30px',
+                                        border: 'none',
+                                        backgroundColor: '#1a1a1a',
+                                        color: '#fff',
+                                        fontSize: '1rem',
+                                        fontWeight: '600',
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.2s ease, background-color 0.2s ease',
+                                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                                    }}
+                                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
+                                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
+                                        onClick={buttonConfig[1].onClick}
+                                    >
+                                        {buttonConfig[1].label}
+                                    </button>
+                                </div>
+                                <div style={{ flex: '1', backgroundColor: '#f9f9f9', borderRadius: '12px', overflow: 'hidden' }}>
+                                    <img src={bmr} alt="BMR Analysis" style={{ width: '100%', display: 'block', borderRadius: '12px', objectFit: 'cover' }} />
+                                </div>
+                            </div>
+                        </ScrollStackItem>
 
-                        {/* 3. Description text at the bottom */}
-                        <div style={{ padding: '10px 40px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <p style={{
-                                color: '#555',
-                                fontSize: '1.1rem',
-                                lineHeight: '1.7',
-                                margin: 0,
-                                textAlign: 'center',
-                                marginBottom: '20px'
-                            }}>
-                                Skip the guesswork. Dedicated doctor consultations and targeted blood panels
-                                to map your metabolic markers with clinical precision.
-                            </p>
-                        </div>
-                    </Card>
-                    <Card style={{
-                        width: '100%',
-                        maxWidth: '800px',
-                        borderRadius: '24px',
-                        overflow: 'hidden',
-                        boxShadow: '0 20px 40px rgba(0,0,0,0.06)',
-                        border: '1px solid #f0f0f0',
-                        backgroundColor: '#fff',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
-                        {/* 1. Title at the very top */}
-                        <div style={{ padding: '20px 32px 20px 32px' }}>
-                            <h3 style={{
-                                fontSize: '24px',
-                                fontWeight: '400',
-                                color: '#1a1a1a',
-                                margin: 0,
-                                lineHeight: '1.2',
+                        <ScrollStackItem>
+                            <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                                <div style={{ flex: '1', textAlign: 'left' }}>
+                                    <h3 style={{ fontSize: '24px', fontWeight: '400', color: '#1a1a1a', margin: '0 0 16px 0', lineHeight: '1.2' }}>
+                                        Deep Full-Body Analysis
+                                    </h3>
+                                    <p style={{ color: '#555', fontSize: '1.1rem', lineHeight: '1.7', margin: '0 0 24px 0' }}>
+                                        A 360° view of your health. We analyze visceral fat, muscle mass, and metabolic age to track what weight scales miss.
+                                    </p>
+                                    <button className="primary-button" style={{
+                                        padding: '12px 24px',
+                                        borderRadius: '30px',
+                                        border: 'none',
+                                        backgroundColor: '#1a1a1a',
+                                        color: '#fff',
+                                        fontSize: '1rem',
+                                        fontWeight: '600',
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.2s ease, background-color 0.2s ease',
+                                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                                    }}
+                                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
+                                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
+                                        onClick={buttonConfig[2].onClick}
+                                    >
+                                        {buttonConfig[2].label}
+                                    </button>
+                                </div>
+                                <div style={{ flex: '1', backgroundColor: '#f9f9f9', borderRadius: '12px', overflow: 'hidden' }}>
+                                    <img src={fba} alt="Full-Body Analysis" style={{ width: '100%', display: 'block', borderRadius: '12px', objectFit: 'cover' }} />
+                                </div>
+                            </div>
+                        </ScrollStackItem>
 
-                            }}>
-                                BMR-Driven Macro Mapping
-                            </h3>
-                        </div>
-
-                        {/* 2. Full Image in the middle */}
-                        <div style={{ width: '100%', height: '71%', backgroundColor: '#f9f9f9' }}>
-                            <img
-                                src={bmr}
-                                alt="Doctor"
-                                style={{
-                                    width: '86%',
-                                    height: '93%', // Allows the full image to show without cropping
-                                    display: 'block',
-                                    paddingLeft: '50px',
-                                    borderRadius: '12px'
-                                }}
-                            />
-                        </div>
-
-                        {/* 3. Description text at the bottom */}
-                        <div style={{ padding: '10px 40px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <p style={{
-                                color: '#555',
-                                fontSize: '1.1rem',
-                                lineHeight: '1.7',
-                                margin: 0,
-                                textAlign: 'center',
-                                marginBottom: '20px'
-                            }}>
-                                Using your Basal Metabolic Rate and clinical data, our experts engineer a precise nutritional roadmap of calories and macros.
-                            </p>
-                        </div>
-                    </Card>
-                    <Card style={{
-                        width: '100%',
-                        maxWidth: '800px',
-                        borderRadius: '24px',
-                        overflow: 'hidden',
-                        boxShadow: '0 20px 40px rgba(0,0,0,0.06)',
-                        border: '1px solid #f0f0f0',
-                        backgroundColor: '#fff',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
-                        {/* 1. Title at the very top */}
-                        <div style={{ padding: '20px 32px 20px 32px' }}>
-                            <h3 style={{
-                                fontSize: '24px',
-                                fontWeight: '400',
-                                color: '#1a1a1a',
-                                margin: 0,
-                                lineHeight: '1.2',
-
-                            }}>
-                                Deep Full-Body Analysis
-                            </h3>
-                        </div>
-
-                        {/* 2. Full Image in the middle */}
-                        <div style={{ width: '100%', backgroundColor: '#f9f9f9' }}>
-                            <img
-                                src={fba}
-                                alt="Doctor"
-                                style={{
-                                    width: '86%',
-                                    height: '93%', // Allows the full image to show without cropping
-                                    display: 'block',
-                                    paddingLeft: '50px',
-                                    borderRadius: '12px'
-                                }}
-                            />
-                        </div>
-
-                        {/* 3. Description text at the bottom */}
-                        <div style={{ padding: '10px 40px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <p style={{
-                                color: '#555',
-                                fontSize: '1.1rem',
-                                lineHeight: '1.7',
-                                margin: 0,
-                                textAlign: 'center',
-                                marginBottom: '20px'
-                            }}>
-                                A 360° view of your health. We analyze visceral fat, muscle mass, and metabolic age to track what weight scales miss.
-                            </p>
-                        </div>
-                    </Card>
-                    <Card style={{
-                        width: '100%',
-                        maxWidth: '800px',
-                        borderRadius: '24px',
-                        overflow: 'hidden',
-                        boxShadow: '0 20px 40px rgba(0,0,0,0.06)',
-                        border: '1px solid #f0f0f0',
-                        backgroundColor: '#fff',
-                        display: 'flex',
-                        flexDirection: 'column'
-                    }}>
-                        {/* 1. Title at the very top */}
-                        <div style={{ padding: '20px 32px 20px 32px' }}>
-                            <h3 style={{
-                                fontSize: '24px',
-                                fontWeight: '400',
-                                color: '#1a1a1a',
-                                margin: 0,
-                                lineHeight: '1.2',
-
-                            }}>
-                                Precision Personalized Delivery
-                            </h3>
-                        </div>
-
-                        {/* 2. Full Image in the middle */}
-                        <div style={{ width: '100%', backgroundColor: '#f9f9f9' }}>
-                            <img
-                                src={del}
-                                alt="Doctor"
-                                style={{
-                                    width: '86%',
-                                    height: '93%', // Allows the full image to show without cropping
-                                    display: 'block',
-                                    paddingLeft: '50px',
-                                    borderRadius: '12px'
-                                }}
-                            />
-                        </div>
-
-                        {/* 3. Description text at the bottom */}
-                        <div style={{ padding: '10px 40px 40px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <p style={{
-                                color: '#555',
-                                fontSize: '1.1rem',
-                                lineHeight: '1.7',
-                                margin: 0,
-                                textAlign: 'center',
-                                marginBottom: '20px'
-                            }}>
-                                Nutritionist-crafted, medical-grade meals tailored to your profile, delivered fresh to your doorstep daily.
-                            </p>
-                        </div>
-                    </Card>
-                </CardSwap>
+                        <ScrollStackItem>
+                            <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                                <div style={{ flex: '1', textAlign: 'left' }}>
+                                    <h3 style={{ fontSize: '24px', fontWeight: '400', color: '#1a1a1a', margin: '0 0 16px 0', lineHeight: '1.2' }}>
+                                        Precision Personalized Delivery
+                                    </h3>
+                                    <p style={{ color: '#555', fontSize: '1.1rem', lineHeight: '1.7', margin: '0 0 24px 0' }}>
+                                        Nutritionist-crafted, medical-grade meals tailored to your profile, delivered fresh to your doorstep daily.
+                                    </p>
+                                    <button className="primary-button" style={{
+                                        padding: '12px 24px',
+                                        borderRadius: '30px',
+                                        border: 'none',
+                                        backgroundColor: '#1a1a1a',
+                                        color: '#fff',
+                                        fontSize: '1rem',
+                                        fontWeight: '600',
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.2s ease, background-color 0.2s ease',
+                                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                                    }}
+                                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
+                                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
+                                        onClick={buttonConfig[3].onClick}
+                                    >
+                                        {buttonConfig[3].label}
+                                    </button>
+                                </div>
+                                <div style={{ flex: '1', backgroundColor: '#f9f9f9', borderRadius: '12px', overflow: 'hidden' }}>
+                                    <img src={del} alt="Delivery" style={{ width: '100%', display: 'block', borderRadius: '12px', objectFit: 'cover' }} />
+                                </div>
+                            </div>
+                        </ScrollStackItem>
+                    </ScrollStack>
+                </div>
             </div>
 
             {/* Food Thats Coded for You Section */}

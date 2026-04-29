@@ -75,13 +75,21 @@ const CardSwap = ({
     const total = refs.length;
     refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount));
 
-    const swap = () => {
+    let isAnimating = false;
+
+    const swap = (onStart) => {
       if (order.current.length < 2) return;
+      isAnimating = true;
 
       const [front, ...rest] = order.current;
       const elFront = refs[front].current;
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({
+        onComplete: () => {
+          isAnimating = false;
+        }
+      });
       tlRef.current = tl;
+      if (onStart) onStart(tl);
 
       tl.to(elFront, {
         y: '+=500',
@@ -134,35 +142,106 @@ const CardSwap = ({
       });
     };
 
+    let timeoutId;
+    const startAutoPlay = () => {
+      clearInterval(intervalRef.current);
+      intervalRef.current = window.setInterval(() => {
+        if (!isAnimating) swap();
+      }, delay);
+    };
+
     // Delay the first swap so the initial layout has time to render properly on Safari/Mac
-    const timeoutId = setTimeout(() => {
+    timeoutId = setTimeout(() => {
       swap();
-      intervalRef.current = window.setInterval(swap, delay);
+      startAutoPlay();
     }, delay);
 
+    const handleManualNext = () => {
+      // Return early if animating preventing multiple rapid clicks breaking gsap
+      if (isAnimating) return;
+      
+      swap((tl) => {
+        // slightly faster manual swap
+        tl.timeScale(1.5);
+      });
+      startAutoPlay(); // Reset the timer
+    };
+
+    const node = container.current;
+    
+    // Add touch handlers for swiping
+    let touchStartY = 0;
+    let touchStartX = 0;
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+    };
+    const handleTouchEnd = (e) => {
+      const diffY = e.changedTouches[0].clientY - touchStartY;
+      const diffX = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(diffX) > 40 || Math.abs(diffY) > 40) {
+        handleManualNext();
+      }
+    };
+    
+    // Add wheel handler for scrolling
+    let wheelDebounce;
+    const handleWheel = (e) => {
+      // Only capture prominent horizontal scrolls to not interfere with vertical page scroll
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 20) {
+        e.preventDefault(); // Prevent page back/forward navigation
+        if (wheelDebounce) clearTimeout(wheelDebounce);
+        wheelDebounce = setTimeout(() => {
+          handleManualNext();
+        }, 150);
+      }
+    };
+
+    node.addEventListener('touchstart', handleTouchStart, { passive: true });
+    node.addEventListener('touchend', handleTouchEnd, { passive: true });
+    node.addEventListener('wheel', handleWheel, { passive: false });
+    
+    // Allow clicking the container to swap
+    const handleClick = () => handleManualNext();
+    node.addEventListener('click', handleClick);
+
     if (pauseOnHover) {
-      const node = container.current;
       const pause = () => {
         tlRef.current?.pause();
         clearInterval(intervalRef.current);
         clearTimeout(timeoutId);
       };
       const resume = () => {
-        tlRef.current?.play();
-        intervalRef.current = window.setInterval(swap, delay);
+        // If animation was paused mid-flight, resume it
+        if (tlRef.current?.paused()) tlRef.current.play();
+        startAutoPlay();
       };
+      
       node.addEventListener('mouseenter', pause);
       node.addEventListener('mouseleave', resume);
       return () => {
+        node.removeEventListener('touchstart', handleTouchStart);
+        node.removeEventListener('touchend', handleTouchEnd);
+        node.removeEventListener('wheel', handleWheel);
+        node.removeEventListener('click', handleClick);
         node.removeEventListener('mouseenter', pause);
         node.removeEventListener('mouseleave', resume);
+        // Important: Stop animation from running on unmount
+        if (tlRef.current) tlRef.current.kill();
         clearInterval(intervalRef.current);
         clearTimeout(timeoutId);
+        if (wheelDebounce) clearTimeout(wheelDebounce);
       };
     }
     return () => {
+      node.removeEventListener('touchstart', handleTouchStart);
+      node.removeEventListener('touchend', handleTouchEnd);
+      node.removeEventListener('wheel', handleWheel);
+      node.removeEventListener('click', handleClick);
+      if (tlRef.current) tlRef.current.kill();
       clearInterval(intervalRef.current);
       clearTimeout(timeoutId);
+      if (wheelDebounce) clearTimeout(wheelDebounce);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
@@ -182,7 +261,11 @@ const CardSwap = ({
   );
 
   return (
-    <div ref={container} className="card-swap-container" style={{ width, height }}>
+    <div 
+      ref={container} 
+      className="card-swap-container" 
+      style={{ width, height, cursor: 'pointer', touchAction: 'pan-y', pointerEvents: 'auto' }}
+    >
       {rendered}
     </div>
   );
