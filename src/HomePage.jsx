@@ -381,27 +381,27 @@ function HomePage({ openBmrCalculator = false }) {
                         <div style={{ textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
                             <img src={food1} alt="Food 1" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
                             <div style={{ padding: '24px' }}>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Lorem Ipsum</h3>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Paneer Salad</h3>
                                 <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Who said vegetarian had to be boring? We’ve taken cubes of protein-packed paneer, tossed them in our secret spices, and laid them over a bed of greens that actually taste like they want to be there. It’s finished with a drizzle of "chef’s kiss" white sauce and a kick of zest. High protein, zero regrets, and 100% chance of making your coworkers jealous
                                 </p>
                             </div>
                         </div>
                         <div style={{ textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
                             <img src={food2} alt="Food 2" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
                             <div style={{ padding: '24px' }}>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Dolor Sit Amet</h3>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Chicken Rice Bowl</h3>
                                 <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    This bowl is the overachiever of our menu. Packed with lean grilled chicken, fiber-heavy beans, and golden corn, it’s basically a high-performance session in a container (minus the sweat). Whether you're fueling for a heavy lift or a marathon of deep-work blocks, this provides the clean energy you need to crush your goals without the 2:00 PM system crash.
                                 </p>
                             </div>
                         </div>
                         <div style={{ textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
                             <img src={food3} alt="Food 3" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
                             <div style={{ padding: '24px' }}>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Consectetur Adipiscing</h3>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Chicken Salad</h3>
                                 <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                    Forget the fillers and the "healthy" fluff. This is high-octane nutrition in its purest form. We’ve loaded it with succulent chicken, fiber-rich greens, and vibrant peppers for a meal that hits like a total system upgrade. It’s visual, it’s potent, and it’s the ultimate low-latency fuel to keep you moving at 100%. Raw energy, refined.
                                 </p>
                             </div>
                         </div>
