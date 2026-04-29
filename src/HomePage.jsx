@@ -293,7 +293,7 @@ function HomePage({ openBmrCalculator = false }) {
             </div>
 
             {/* Food Thats Coded for You Section */}
-            <div style={{ padding: '6rem 2rem', backgroundColor: '#fff', textAlign: 'center' }}>
+            <div style={{ padding: '6rem 2rem', textAlign: 'center' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '800', color: '#1a1a1a', marginBottom: '3rem', lineHeight: '1.1' }}>
                         Food that's Coded for You, Not the Crowd.
@@ -320,7 +320,7 @@ function HomePage({ openBmrCalculator = false }) {
             </div>
 
             {/* Fit Bar Section */}
-            <div style={{ padding: '6rem 2rem', backgroundColor: '#fafafa' }}>
+            <div style={{ padding: '6rem 2rem' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '60px' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'center' }}>
                         <div style={{ flex: '1 1 calc(66.666% - 20px)', minWidth: '300px', textAlign: 'left', paddingRight: '2vw' }}>
@@ -360,7 +360,7 @@ function HomePage({ openBmrCalculator = false }) {
             </div>
 
             {/* The Top Shelf Stash Section */}
-            <div style={{ padding: '6rem 2rem', backgroundColor: '#fff', position: 'relative' }}>
+            <div style={{ padding: '6rem 2rem', position: 'relative' }}>
                 <img
                     src={yellowElement}
                     alt="Yellow Decoration"
@@ -411,7 +411,7 @@ function HomePage({ openBmrCalculator = false }) {
 
             {/* Instagram Reels Section */}
             <div
-                style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: '#fff', marginTop: '2rem' }}
+                style={{ padding: '4rem 2rem', textAlign: 'center', marginTop: '2rem' }}
             >
                 <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '3rem', color: '#1a1a1a', fontWeight: '800' }}>
                     See us in action!
@@ -515,7 +515,7 @@ function HomePage({ openBmrCalculator = false }) {
             </div>
 
             {/* Our Investors Section */}
-            <div style={{ padding: '4rem 2rem', textAlign: 'center', backgroundColor: '#f5f5f5' }}>
+            <div style={{ padding: '4rem 2rem', textAlign: 'center' }}>
                 <h2 style={{ marginBottom: '3rem', color: '#1a1a1a', textTransform: 'uppercase' }}>
                     Our Investors
                 </h2>

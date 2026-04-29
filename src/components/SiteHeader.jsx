@@ -1,4 +1,4 @@
-import logoWithName from '../assets/logos/logo.png'
+import logoWithName from '../assets/logos/logoWithName.svg'
 import './SiteHeader.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -41,7 +41,7 @@ function SiteHeader() {
                 width: '100%'
             }}>
                 <Link to="/" className="brand-mark" aria-label="Swapnow home" style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src={logoWithName} alt="Swapnow" style={{ height: '36px', transition: 'transform 0.3s ease', marginLeft: '36px', scale: '5' }} onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.target.style.transform = 'scale(1)'} />
+                    <img src={logoWithName} alt="Swapnow" style={{ height: '36px', transition: 'transform 0.3s ease', marginLeft: '36px', scale: '1' }} onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.target.style.transform = 'scale(1)'} />
                 </Link>
                 <div className="site-header-actions" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                     <Link to="/franchise"
