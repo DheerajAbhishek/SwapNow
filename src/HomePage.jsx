@@ -5,6 +5,7 @@ import './theme.css'
 import './App.css'
 import SiteHeader from './components/SiteHeader'
 import HeroSection from './components/HeroSection'
+import Wheelpicker from './components/Wheelpicker'
 
 import Testimonials from './components/Testimonials'
 // import Dock from './components/Dock'
@@ -157,40 +158,6 @@ function HomePage({ openBmrCalculator = false }) {
                             <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                                 <div style={{ flex: '1', textAlign: 'left' }}>
                                     <h3 style={{ fontSize: '24px', fontWeight: '400', color: '#1a1a1a', margin: '0 0 16px 0', lineHeight: '1.2' }}>
-                                        Professional Clinical Consultation
-                                    </h3>
-                                    <p style={{ color: '#555', fontSize: '1.1rem', lineHeight: '1.7', margin: '0 0 24px 0' }}>
-                                        Skip the guesswork. Dedicated doctor consultations and targeted blood panels to map your metabolic markers with clinical precision.
-                                    </p>
-                                    <button className="primary-button" style={{
-                                        padding: '12px 24px',
-                                        borderRadius: '30px',
-                                        border: 'none',
-                                        backgroundColor: '#1a1a1a',
-                                        color: '#fff',
-                                        fontSize: '1rem',
-                                        fontWeight: '600',
-                                        cursor: 'pointer',
-                                        transition: 'transform 0.2s ease, background-color 0.2s ease',
-                                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
-                                    }}
-                                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
-                                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
-                                        onClick={buttonConfig[0].onClick}
-                                    >
-                                        {buttonConfig[0].label}
-                                    </button>
-                                </div>
-                                <div style={{ flex: '1', backgroundColor: '#f9f9f9', borderRadius: '12px', overflow: 'hidden' }}>
-                                    <img src={doc} alt="Doctor" style={{ width: '100%', display: 'block', borderRadius: '12px', objectFit: 'cover' }} />
-                                </div>
-                            </div>
-                        </ScrollStackItem>
-
-                        <ScrollStackItem>
-                            <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-                                <div style={{ flex: '1', textAlign: 'left' }}>
-                                    <h3 style={{ fontSize: '24px', fontWeight: '400', color: '#1a1a1a', margin: '0 0 16px 0', lineHeight: '1.2' }}>
                                         BMR-Driven Macro Mapping
                                     </h3>
                                     <p style={{ color: '#555', fontSize: '1.1rem', lineHeight: '1.7', margin: '0 0 24px 0' }}>
@@ -220,7 +187,6 @@ function HomePage({ openBmrCalculator = false }) {
                                 </div>
                             </div>
                         </ScrollStackItem>
-
                         <ScrollStackItem>
                             <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                                 <div style={{ flex: '1', textAlign: 'left' }}>
@@ -254,6 +220,43 @@ function HomePage({ openBmrCalculator = false }) {
                                 </div>
                             </div>
                         </ScrollStackItem>
+                        <ScrollStackItem>
+                            <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                                <div style={{ flex: '1', textAlign: 'left' }}>
+                                    <h3 style={{ fontSize: '24px', fontWeight: '400', color: '#1a1a1a', margin: '0 0 16px 0', lineHeight: '1.2' }}>
+                                        Professional Clinical Consultation
+                                    </h3>
+                                    <p style={{ color: '#555', fontSize: '1.1rem', lineHeight: '1.7', margin: '0 0 24px 0' }}>
+                                        Skip the guesswork. Dedicated doctor consultations and targeted blood panels to map your metabolic markers with clinical precision.
+                                    </p>
+                                    <button className="primary-button" style={{
+                                        padding: '12px 24px',
+                                        borderRadius: '30px',
+                                        border: 'none',
+                                        backgroundColor: '#1a1a1a',
+                                        color: '#fff',
+                                        fontSize: '1rem',
+                                        fontWeight: '600',
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.2s ease, background-color 0.2s ease',
+                                        boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                                    }}
+                                        onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
+                                        onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
+                                        onClick={buttonConfig[0].onClick}
+                                    >
+                                        {buttonConfig[0].label}
+                                    </button>
+                                </div>
+                                <div style={{ flex: '1', backgroundColor: '#f9f9f9', borderRadius: '12px', overflow: 'hidden' }}>
+                                    <img src={doc} alt="Doctor" style={{ width: '100%', display: 'block', borderRadius: '12px', objectFit: 'cover' }} />
+                                </div>
+                            </div>
+                        </ScrollStackItem>
+
+
+
+
 
                         <ScrollStackItem>
                             <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
@@ -293,7 +296,7 @@ function HomePage({ openBmrCalculator = false }) {
             </div>
 
             {/* Food Thats Coded for You Section */}
-            <div style={{ padding: '6rem 2rem', textAlign: 'center' }}>
+            <div className="section">
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '800', color: '#1a1a1a', marginBottom: '3rem', lineHeight: '1.1' }}>
                         Food that's Coded for You, Not the Crowd.
@@ -318,6 +321,8 @@ function HomePage({ openBmrCalculator = false }) {
                     </div>
                 </div>
             </div>
+            {/* wheel picker */}
+            <Wheelpicker scale={1.5} />
 
             {/* Fit Bar Section */}
             <div style={{ padding: '6rem 2rem' }}>
@@ -359,7 +364,7 @@ function HomePage({ openBmrCalculator = false }) {
                 </div>
             </div>
 
-            {/* The Top Shelf Stash Section */}
+            {/* The Top Shelf Stash Section
             <div style={{ padding: '6rem 2rem', position: 'relative' }}>
                 <img
                     src={yellowElement}
@@ -383,8 +388,7 @@ function HomePage({ openBmrCalculator = false }) {
                             <div style={{ padding: '24px' }}>
                                 <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Paneer Salad</h3>
                                 <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                                    Who said vegetarian had to be boring? We’ve taken cubes of protein-packed paneer, tossed them in our secret spices, and laid them over a bed of greens that actually taste like they want to be there. It’s finished with a drizzle of "chef’s kiss" white sauce and a kick of zest. High protein, zero regrets, and 100% chance of making your coworkers jealous
-                                </p>
+                                    Spiced paneer cubes on premium greens with a zesty white sauce drizzle. High protein, zero regrets, and 100% jealousy-inducing. </p>
                             </div>
                         </div>
                         <div style={{ textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
@@ -392,8 +396,7 @@ function HomePage({ openBmrCalculator = false }) {
                             <div style={{ padding: '24px' }}>
                                 <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Chicken Rice Bowl</h3>
                                 <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                                    This bowl is the overachiever of our menu. Packed with lean grilled chicken, fiber-heavy beans, and golden corn, it’s basically a high-performance session in a container (minus the sweat). Whether you're fueling for a heavy lift or a marathon of deep-work blocks, this provides the clean energy you need to crush your goals without the 2:00 PM system crash.
-                                </p>
+                                    Lean chicken, fiber-rich beans, and corn. This is high-performance fuel for your deep-work blocks without the 2:00 PM system crash. Clean energy, zero lag. </p>
                             </div>
                         </div>
                         <div style={{ textAlign: 'left', backgroundColor: '#f9f9f9', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
@@ -401,13 +404,14 @@ function HomePage({ openBmrCalculator = false }) {
                             <div style={{ padding: '24px' }}>
                                 <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '10px', color: '#1a1a1a' }}>Chicken Salad</h3>
                                 <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                                    Forget the fillers and the "healthy" fluff. This is high-octane nutrition in its purest form. We’ve loaded it with succulent chicken, fiber-rich greens, and vibrant peppers for a meal that hits like a total system upgrade. It’s visual, it’s potent, and it’s the ultimate low-latency fuel to keep you moving at 100%. Raw energy, refined.
-                                </p>
+                                    Total system upgrade. Succulent chicken and vibrant peppers for peak performance. Low-latency fuel for max output. Raw energy with zero regrets. </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+
+
 
             {/* Instagram Reels Section */}
             <div
@@ -515,14 +519,60 @@ function HomePage({ openBmrCalculator = false }) {
             </div>
 
             {/* Our Investors Section */}
-            <div style={{ padding: '4rem 2rem', textAlign: 'center' }}>
-                <h2 style={{ marginBottom: '3rem', color: '#1a1a1a', textTransform: 'uppercase' }}>
-                    Our Investors
-                </h2>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', alignItems: 'center', flexWrap: 'wrap' }}>
-                    <img src={ebg} alt="EBG Investor" style={{ height: '80px', objectFit: 'contain', transition: 'all 0.3s ease' }} />
-                    <img src={isb} alt="ISB Investor" style={{ height: '80px', objectFit: 'contain', transition: 'all 0.3s ease' }} />
-                    <img src={pontaq} alt="Pontaq Investor" style={{ height: '80px', objectFit: 'contain', transition: 'all 0.3s ease' }} />
+            <div className="section" style={{ backgroundColor: '#fcfcfc', borderTop: '1px solid rgba(0,0,0,0.03)' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '800', color: '#1a1a1a', marginBottom: '1rem', lineHeight: '1.1' }}>
+                        Backed by Visionaries
+                    </h2>
+                    <p style={{ fontSize: '1.1rem', color: '#555', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem', lineHeight: '1.6' }}>
+                        Partnering with industry leaders who share our mission to revolutionize accessible clinical nutrition.
+                    </p>
+
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', alignItems: 'center', flexWrap: 'wrap' }}>
+                        {[
+                            { src: ebg, alt: "EBG Investor" },
+                            { src: isb, alt: "ISB Investor" },
+                            { src: pontaq, alt: "Pontaq Investor" }
+                        ].map((investor, i) => (
+                            <div key={i} style={{
+                                padding: '2rem 3rem',
+                                backgroundColor: '#fff',
+                                borderRadius: '24px',
+                                boxShadow: '0 10px 30px rgba(0,0,0,0.04)',
+                                border: '1px solid rgba(0,0,0,0.05)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                                cursor: 'default'
+                            }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
+                                    e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.08)';
+                                    const img = e.currentTarget.querySelector('img');
+                                    if (img) img.style.filter = 'opacity(1)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                                    e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.04)';
+                                    const img = e.currentTarget.querySelector('img');
+                                    if (img) img.style.filter = 'opacity(0.8)';
+                                }}
+                            >
+                                <img
+                                    src={investor.src}
+                                    alt={investor.alt}
+                                    style={{
+                                        height: '60px',
+                                        width: '160px',
+                                        objectFit: 'contain',
+                                        filter: 'opacity(0.8)',
+                                        transition: 'filter 0.4s ease'
+                                    }}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 

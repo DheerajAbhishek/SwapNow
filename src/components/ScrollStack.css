@@ -10,6 +10,15 @@
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   will-change: scroll-position;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll-stack-scroller::-webkit-scrollbar {
+  display: none;
 }
 
 .scroll-stack-inner {

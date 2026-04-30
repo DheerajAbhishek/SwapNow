@@ -121,7 +121,7 @@
 }
 
 .hero span.accent {
-    font-style: italic;
+
     font-weight: 700;
     color: var(--green);
 }
@@ -626,6 +626,7 @@ footer {
         padding: 30px;
     }
 }
+
 /* Onboarding Form */
 .onboarding-form {
     background: var(--panel);
@@ -635,7 +636,7 @@ footer {
     max-width: 600px;
     margin: 0 auto 60px auto;
     text-align: left;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
 }
 
 .onboarding-form h3 {
